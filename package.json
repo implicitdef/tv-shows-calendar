@@ -35,7 +35,7 @@
     "@types/webpack-dev-middleware": "^2.0.2",
     "@types/webpack-hot-middleware": "^2.16.5",
     "@types/webpack-node-externals": "^1.6.3",
-    "apollo-server": "^2.4.6",
+    "apollo-server": "^2.25.3",
     "apollo-server-express": "^2.4.6",
     "awesome-typescript-loader": "^5.2.1",
     "axios": "^0.18.0",
