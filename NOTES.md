@@ -14,12 +14,23 @@
 
 ### How to deploy to heroku
 
-Just push to master
+    # Start by push to Github just to be sure to keep everything in sync
+    git push
+    # Login dans la CLI de Heroku 
+    heroku login
+    # Check if you have "heroku" remote configured
+    git remote -v
+    # If you don't have "heroku" remote, configure it with this command :
+    heroku git:remote -a tv-shows-calendar
+    # Push to Heroku to do the deploy
+    # This will take a few minutes
+    git push heroku
+    
 
 ### How is the deployement wired up ?
 
 - Domain name www.implicitdef.com is on Namecheap
 - In Namecheap settings, we're hitting on Cloudflare's DNS
 - In Cloudflare's settings, www.implicitdef.com/tv-shows-calendar is redirected to https://tv-shows-calendar.herokuapp.com/
-- https://tv-shows-calendar.herokuapp.com/ is a Heroku app, which has Github integration with this repo, with automatic deployments activated if a push is done on master
+- https://tv-shows-calendar.herokuapp.com/ is a Heroku app, deployed locally from the heroku CLI
 - Heroku executes the script 'heroku-postbuild' in package.json (by convention), then 'heroku-run' (because of the Procfile).
