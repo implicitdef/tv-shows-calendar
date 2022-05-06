@@ -21,10 +21,13 @@ export default function About() {
     <div className='about'>
       <p>
         This calendar helps you keep track of when your favorites TV shows are
-        aired, season by season. Useful for binge-watchers who wait the end of a
-        season to watch it.
+        aired, season by season.
       </p>
-      <p> Create an account to add or remove TV shows from the calendar.</p>
+      <p>Useful if you like to wait the end of a season to watch it.</p>
+      <p>
+        By default only a tiny subset of shows are shown. If you sign in, you
+        will be able to add/remove shows from the calendar.
+      </p>
       <button onClick={onClose} className='about__close'>
         &times;
       </button>
