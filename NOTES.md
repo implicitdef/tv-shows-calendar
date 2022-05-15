@@ -46,5 +46,11 @@
 
     sudo -u eletallieur psql postgres
 
+        # pour lister les dbs
         \l
+        
+        # pour se connecter à la DB tv_shows_calendar
+        \c tv_shows_calendar
 
+        # pour lister les tables
+        \d
