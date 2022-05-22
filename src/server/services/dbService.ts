@@ -56,13 +56,14 @@ export async function saveOrGetUser(google_user_id: string): Promise<number> {
         `${rowsOfIds.length} rows were created by the saveUser query`,
       )
     }
-    const newUserId = rowsOfIds[0]
+    const [newUserId] = rowsOfIds
     // the new user needs to subscribe to all the default shows
-    // TODO essayer de faire un promise.all et voir si ça tient bien. Si non, extraire ce reduce pour que ce soit plus limpide
-    await Conf.defaultShowsIds.reduce(async (previousPromise, serieId) => {
-      await previousPromise
-      return doAddSerieToUser(trx, newUserId, serieId)
-    }, Promise.resolve())
+    // TODO inline la methode et le faire en un seul insert (insert multiple)
+    await Promise.all(
+      Conf.defaultShowsIds.map(showId =>
+        doAddSerieToUser(trx, newUserId, showId),
+      ),
+    )
     return newUserId
   })
 }
