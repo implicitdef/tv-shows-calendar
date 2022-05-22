@@ -4,7 +4,7 @@ import { SomeThunkAction } from 'tv/frontend/redux/actions'
 import { metaActions } from 'tv/frontend/redux/ducks/meta'
 import { searchActions } from 'tv/frontend/redux/ducks/search'
 
-export const unfollowShow = (id: string): SomeThunkAction<void> => {
+export const unfollowShow = (id: number): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
       await api.unfollowShow({ dispatch, getState }, id)
@@ -15,7 +15,7 @@ export const unfollowShow = (id: string): SomeThunkAction<void> => {
   }
 }
 
-export const followShow = (id: string): SomeThunkAction<void> => {
+export const followShow = (id: number): SomeThunkAction<void> => {
   return async (dispatch, getState) => {
     try {
       dispatch(searchActions.clear())

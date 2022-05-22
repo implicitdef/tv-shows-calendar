@@ -1,10 +1,12 @@
-- mettre graphql, d'abord coté server
-- puis faire coté front
-- ptet faire certains trucs avec des hooks au lieu de redux (la search par exemple ?)
+- redux : upgrader avec redux-toolkit
+- ptêt refaire certains trucs avec des hooks au lieu de redux (la search par exemple ?).
+- ptêt voir si je peux pas bricoler une alternative à redux moi-même (avec juste un état, et les actions seraient directement des fonctions, ça marcheraient non ?)
 - rebosser un peu le css, essayer de passer à un container non-fluide
-- utiliser css modules, virer BEM ? ou inline CSS ?
+- optimiser perfs des appels, se démerder pour quel la page initiale puisse être rapide même si je mets pleins de série par défaut.
 - optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)
 - optimiser perfs : cf les warnings quand on build comme en prod
+- regarder si firebase est pas une bonne solution pour faire un backend simplifié et avoir une connexion utilisateur toute faite
 - ptet afficher un loader discret pour quand les series se rechargent
+- feature : faire que les séries puissent être cherchées/ajoutés/supprimés en localstorage si on est pas connecté (but : que je puisse montrer mon projet facilement lors des entretiens)
 - un jour faire un affichage décent sur mobile
 - ...

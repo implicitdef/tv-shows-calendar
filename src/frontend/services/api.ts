@@ -29,7 +29,7 @@ export function searchShows(wirings: Wirings, q: string): Promise<Show[]> {
 
 export function seasonsOfShow(
   wirings: Wirings,
-  showId: string,
+  showId: number,
 ): Promise<Season<Moment>[]> {
   return cache.cached(`seasons-of-${showId}`, () => {
     return getAxios(wirings)
@@ -65,7 +65,7 @@ export function defaultShows(wirings: Wirings): Promise<Show[]> {
   })
 }
 
-export async function followShow(wirings: Wirings, id: string): Promise<void> {
+export async function followShow(wirings: Wirings, id: number): Promise<void> {
   try {
     await getAxios(wirings).post(`${base}/me/shows/${id}`)
   } catch (err) {
@@ -80,7 +80,7 @@ export async function followShow(wirings: Wirings, id: string): Promise<void> {
 
 export async function unfollowShow(
   wirings: Wirings,
-  id: string,
+  id: number,
 ): Promise<void> {
   await getAxios(wirings).delete(`${base}/me/shows/${id}`)
 }

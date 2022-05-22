@@ -9,15 +9,7 @@ const knexClient = knex({
 })
 
 export async function loadData(): Promise<ShowAndSeasons[]> {
-  const data = await DbQueries.loadData(knexClient)
-  return data.map(showAndSeason => ({
-    ...showAndSeason,
-    serie: {
-      ...showAndSeason.serie,
-      // turns the id into strings
-      id: String(showAndSeason.serie.id),
-    },
-  }))
+  return await DbQueries.loadData(knexClient)
 }
 export async function saveOrGetUser(googleUserId: string): Promise<number> {
   return knexClient.transaction(async trx => {
@@ -28,7 +20,7 @@ export async function saveOrGetUser(googleUserId: string): Promise<number> {
     const newUserId = await DbQueries.saveUser(trx, googleUserId)
     await Conf.defaultShowsIds.reduce(async (previousPromise, serieId) => {
       await previousPromise
-      return DbQueries.addSerieToUser(trx, newUserId, parseInt(serieId, 10))
+      return DbQueries.addSerieToUser(trx, newUserId, serieId)
     }, Promise.resolve())
     return newUserId
   })
@@ -49,9 +41,8 @@ export async function removeSerieFromUser(
     parseInt(serieId, 10),
   )
 }
-export async function getSeriesOfUser(userId: number): Promise<string[]> {
-  const ids = await DbQueries.getSeriesOfUser(knexClient, userId)
-  return ids.map(_ => String(_))
+export async function getSeriesOfUser(userId: number): Promise<number[]> {
+  return await DbQueries.getSeriesOfUser(knexClient, userId)
 }
 
 export async function pushData(data: string): Promise<void> {

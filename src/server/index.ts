@@ -8,7 +8,6 @@ import {
   NotFoundError,
   AuthError,
 } from 'tv/server/utils/web'
-import { apolloServer } from 'tv/server/graphqlProto'
 import { authRequiredMiddleware, LoggedInRequest } from 'tv/server/auth/auth'
 
 console.log(`Server started with process.env.NODE_ENV = `, process.env.NODE_ENV)
@@ -128,7 +127,5 @@ app.post(
     }
   },
 )
-
-apolloServer.applyMiddleware({ app, path: '/apollo' })
 
 finishExpressAppSetupAndLaunch(app)
