@@ -1,3 +1,6 @@
+- revoir toute l'archi : séparer proprement server et frontend, sans rien en commun (ni version de node, de yarn, ni webpack, ni package.json). Comme ça on peux bosser un peu plus efficacement, et updater un côté sans casser l'autre.
+    Pour faire ça il va falloir refaire tout le projet from scratch dans un autre dossier je pense
+
 - traiter TODOs dans le code
 - côté server, essayer de se débarasser de l'archi old schoold controller/services, essayer de tout mettre direct dans le controller, quitte à séparer en plusieurs controlleurs. Je pense que ça devrait rendre le code beaucoup plus limpide.
 - repasser sur le code, revoir certains nommages, voir si je peux faire plus clair/plus simple
