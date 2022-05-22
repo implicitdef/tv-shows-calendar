@@ -3,6 +3,7 @@
 - redux : upgrader avec redux-toolkit
 - ptêt refaire certains trucs avec des hooks au lieu de redux (la search par exemple ?).
 - ptêt voir si je peux pas bricoler une alternative à redux moi-même (avec juste un état, et les actions seraient directement des fonctions, ça marcheraient non ?)
+- voir si on peut pas externaliser la creation de compte avec un truc genre Firebase (mais garder quand même mon backend, car c'est bien de m'entrainer là dessus aussi)
 - rebosser un peu le css, essayer de passer à un container non-fluide
 - optimiser perfs des appels, se démerder pour quel la page initiale puisse être rapide même si je mets pleins de série par défaut.
 - optimiser perfs : essayer d'importer que ce que j'ai besoin de bootstrap (la grid)

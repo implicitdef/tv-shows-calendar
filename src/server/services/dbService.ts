@@ -1,5 +1,4 @@
-import knex from 'knex'
-import * as DbQueries from 'tv/server/services/dbQueries'
+import knex, { QueryInterface } from 'knex'
 import * as Conf from 'tv/server/utils/conf'
 import { DataFromDb, ShowAndSeasons } from 'tv/shared/domain'
 import { knexToPromise } from '../utils/utils'
@@ -32,40 +31,102 @@ export async function loadData(): Promise<ShowAndSeasons[]> {
   )
   return JSON.parse(rows[0].content) as DataFromDb
 }
+
 export async function saveOrGetUser(googleUserId: string): Promise<number> {
   return knexClient.transaction(async trx => {
-    const maybeUser = await DbQueries.getUserByGoogleUserId(trx, googleUserId)
-    if (maybeUser) {
-      return maybeUser.id
+    const userRows = await knexToPromise<User[]>(
+      trx
+        .select()
+        .where({
+          google_user_id: googleUserId,
+        })
+        .from('users'),
+    )
+    if (userRows.length) {
+      return userRows[0].id
     }
-    const newUserId = await DbQueries.saveUser(trx, googleUserId)
+    const rowsOfIds = await knexToPromise<number[]>(
+      trx
+        .insert({
+          google_user_id: googleUserId,
+        })
+        .into('users')
+        .returning('id'),
+    )
+    if (rowsOfIds.length !== 1) {
+      throw new Error(
+        `${rowsOfIds.length} rows were created by the saveUser query`,
+      )
+    }
+    const newUserId = rowsOfIds[0]
+    // the new user needs to subscribe to all the default shows
+    // TODO essayer de faire un promise.all et voir si ça tient bien. Si non, extraire ce reduce pour que ce soit plus limpide
     await Conf.defaultShowsIds.reduce(async (previousPromise, serieId) => {
       await previousPromise
-      return DbQueries.addSerieToUser(trx, newUserId, serieId)
+      return doAddSerieToUser(trx, newUserId, serieId)
     }, Promise.resolve())
     return newUserId
   })
 }
+
 export async function addSerieToUser(
   userId: number,
-  serieId: string,
+  serieId: number,
 ): Promise<void> {
-  await DbQueries.addSerieToUser(knexClient, userId, parseInt(serieId, 10))
+  doAddSerieToUser(knexClient, userId, serieId)
 }
+
 export async function removeSerieFromUser(
   userId: number,
   serieId: string,
 ): Promise<void> {
-  return DbQueries.removeSerieFromUser(
-    knexClient,
-    userId,
-    parseInt(serieId, 10),
+  return knexToPromise<void>(
+    knexClient
+      .del()
+      .where({
+        user_id: userId,
+        serie_id: serieId,
+      })
+      .from('users_series'),
   )
 }
 export async function getSeriesOfUser(userId: number): Promise<number[]> {
-  return await DbQueries.getSeriesOfUser(knexClient, userId)
+  const rows = await knexToPromise<UserSerieRow[]>(
+    knexClient
+      .select()
+      .from('users_series')
+      .where({
+        user_id: userId,
+      })
+      .orderBy('serie_id', 'asc'),
+  )
+  return rows.map(row => row.serie_id)
 }
 
 export async function pushData(data: string): Promise<void> {
-  return DbQueries.pushData(knexClient, data)
+  return await knexToPromise<void>(
+    knexClient.insert({ content: data }).into('raw_json_data'),
+  )
+}
+
+async function doAddSerieToUser(
+  knx: QueryInterface,
+  userId: number,
+  serieId: number,
+): Promise<void> {
+  try {
+    await knexToPromise<unknown>(
+      knx
+        .insert({
+          user_id: userId,
+          serie_id: serieId,
+        })
+        .into('users_series'),
+    )
+  } catch (err) {
+    // swallow duplicate key constraint
+    if (err.code !== '23505') {
+      throw err
+    }
+  }
 }
