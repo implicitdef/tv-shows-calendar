@@ -3,6 +3,8 @@ import * as Conf from 'tv/server/utils/conf'
 import { DataFromDb, ShowAndSeasons } from 'tv/shared/domain'
 import { knexToPromise } from '../utils/utils'
 
+// TODO utiliser Typescript avec knex, regarder dans la doc, il y a une manière plus propre apparemment. Regarder s'ils ont pas un truc pour les promises aussi
+
 type RawJsonDataRow = {
   id: number
   content: string
@@ -22,34 +24,30 @@ const knexClient = knex({
 })
 
 export async function loadData(): Promise<ShowAndSeasons[]> {
-  const rows = await knexToPromise<RawJsonDataRow[]>(
+  const [{ content }] = await knexToPromise<RawJsonDataRow[]>(
     knexClient
       .select()
       .from('raw_json_data')
       .orderBy('creation_time', 'desc')
       .limit(1),
   )
-  return JSON.parse(rows[0].content) as DataFromDb
+  return JSON.parse(content) as DataFromDb
 }
 
-export async function saveOrGetUser(googleUserId: string): Promise<number> {
+export async function saveOrGetUser(google_user_id: string): Promise<number> {
   return knexClient.transaction(async trx => {
-    const userRows = await knexToPromise<User[]>(
+    const user = await knexToPromise<User>(
       trx
-        .select()
-        .where({
-          google_user_id: googleUserId,
-        })
+        .first()
+        .where({ google_user_id })
         .from('users'),
     )
-    if (userRows.length) {
-      return userRows[0].id
+    if (user) {
+      return user.id
     }
     const rowsOfIds = await knexToPromise<number[]>(
       trx
-        .insert({
-          google_user_id: googleUserId,
-        })
+        .insert({ google_user_id })
         .into('users')
         .returning('id'),
     )
