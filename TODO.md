@@ -1,4 +1,7 @@
+- traiter TODOs dans le code
+- côté server, essayer de se débarasser de l'archi old schoold controller/services, essayer de tout mettre direct dans le controller, quitte à séparer en plusieurs controlleurs. Je pense que ça devrait rendre le code beaucoup plus limpide.
 - repasser sur le code, revoir certains nommages, voir si je peux faire plus clair/plus simple
+
 - upgrader les dépendances
 - redux : upgrader avec redux-toolkit
 - ptêt refaire certains trucs avec des hooks au lieu de redux (la search par exemple ?).
