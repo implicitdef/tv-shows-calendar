@@ -116,7 +116,6 @@ app.post(
   bodyParser.text({ type: '*/*', limit: '50mb' }),
   async (req, res, next) => {
     try {
-      // this should be in a dedicated middleware
       if (req.query.key !== Conf.pushDataApiKey) {
         throw new AuthError()
       }

@@ -1,7 +1,21 @@
 import knex from 'knex'
 import * as DbQueries from 'tv/server/services/dbQueries'
 import * as Conf from 'tv/server/utils/conf'
-import { ShowAndSeasons } from 'tv/shared/domain'
+import { DataFromDb, ShowAndSeasons } from 'tv/shared/domain'
+import { knexToPromise } from '../utils/utils'
+
+type RawJsonDataRow = {
+  id: number
+  content: string
+}
+type User = {
+  id: number
+  google_user_id: string
+}
+type UserSerieRow = {
+  user_id: number
+  serie_id: number
+}
 
 const knexClient = knex({
   client: 'postgres',
@@ -9,7 +23,14 @@ const knexClient = knex({
 })
 
 export async function loadData(): Promise<ShowAndSeasons[]> {
-  return await DbQueries.loadData(knexClient)
+  const rows = await knexToPromise<RawJsonDataRow[]>(
+    knexClient
+      .select()
+      .from('raw_json_data')
+      .orderBy('creation_time', 'desc')
+      .limit(1),
+  )
+  return JSON.parse(rows[0].content) as DataFromDb
 }
 export async function saveOrGetUser(googleUserId: string): Promise<number> {
   return knexClient.transaction(async trx => {

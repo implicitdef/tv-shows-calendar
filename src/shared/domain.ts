@@ -23,4 +23,4 @@ export type TimeRange<T extends TimesType = Moment> = {
   start: T
   end: T
 }
-export type DataFromDb = Array<ShowAndSeasons>
+export type DataFromDb = ShowAndSeasons[]

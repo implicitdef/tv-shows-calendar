@@ -1,11 +1,5 @@
 import { QueryInterface } from 'knex'
 import { knexToPromise } from 'tv/server/utils/utils'
-import { DataFromDb } from 'tv/shared/domain'
-
-type RawJsonDataRow = {
-  id: number
-  content: string
-}
 
 type User = {
   id: number
@@ -14,18 +8,6 @@ type User = {
 type UserSerieRow = {
   user_id: number
   serie_id: number
-}
-
-export async function loadData(knex: QueryInterface): Promise<DataFromDb> {
-  const rows = await knexToPromise<RawJsonDataRow[]>(
-    knex
-      .select()
-      .from('raw_json_data')
-      .orderBy('creation_time', 'desc')
-      .limit(1),
-  )
-  const json = JSON.parse(rows[0].content)
-  return json as DataFromDb
 }
 
 export async function getUserByGoogleUserId(
