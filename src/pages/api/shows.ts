@@ -10,7 +10,6 @@ export default async function handler(
     }[]
   >
 ) {
-  // TODO pourquoi la data semble très petite en dév, je n'ai pas tout chargé ?
   const data = await loadData();
   let series = data.map((_) => _.serie);
   const { q } = req.query;

@@ -6,7 +6,7 @@ export async function loadData(): Promise<DataFromDb> {
   const row = await db
     .selectFrom("raw_json_data")
     .select("content")
-    .orderBy("creation_time")
+    .orderBy("creation_time", "desc")
     .executeTakeFirst();
   if (!row) {
     throw new Error("No data in DB");

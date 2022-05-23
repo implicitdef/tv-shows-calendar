@@ -18,5 +18,5 @@ export default async function handler(
   const seriesFiltered = series.filter((serie) =>
     DEFAULT_SHOWS_IDS.includes(serie.id)
   );
-  res.json(seriesFiltered);
+  return res.json(seriesFiltered);
 }
