@@ -14,7 +14,7 @@ export async function loadData(): Promise<DataFromDb> {
   return JSON.parse(row.content) as DataFromDb;
 }
 
-export const defaultShowsIds = [
+export const DEFAULT_SHOWS_IDS = [
   // If you put too much of those, the first request starts to be a bit too long
 
   // To find ids of shows, look them up on the search field in the app

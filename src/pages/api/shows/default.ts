@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {
-  defaultShowsIds as DEFAULT_SHOWS_IDS,
-  loadData,
-} from "../../../server.core";
+import { DEFAULT_SHOWS_IDS, loadData } from "../../../server.core";
 
 export default async function handler(
   req: NextApiRequest,
