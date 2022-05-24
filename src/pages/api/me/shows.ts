@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getConnectedUserId } from "../../../server.auth";
 import { loadData } from "../../../server.core";
 import { getDb } from "../../../server.db";
 
@@ -11,12 +12,7 @@ export default async function handler(
     }[]
   >
 ) {
-  // TODO faire une vraie authentication plutôt qu'un paramètre de query
-  const { userId } = req.query;
-  if (!userId || typeof userId !== "string") {
-    throw new Error("missing user id");
-  }
-
+  const userId = getConnectedUserId(req);
   const userSeriesIds: number[] = (
     await getDb()
       .selectFrom("users_series")
