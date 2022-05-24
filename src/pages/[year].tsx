@@ -1,21 +1,28 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import CalendarCore from "../components/calendar-core/CalendarCore";
+import { isTimeRangeInYear } from "../dateUtils";
 import { DEFAULT_SHOWS_IDS, loadData } from "../server.core";
-import { ShowAndSeasons } from "../structs";
+import { SeasonWithShow, Show } from "../structs";
 
-type Data = { shows: ShowAndSeasons[] };
+type Data = { year: number; seasons: SeasonWithShow[] };
 
 export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
-  const { year } = context.params || {};
-  if (year && typeof year === "string") {
+  const { year: yearStr } = context.params || {};
+  if (yearStr && typeof yearStr === "string") {
     // TODO gérer si pas un number
-    const yearInt = parseInt(year, 10);
-    // TODO pour optimiser on pourrait ne renvoyer pour chaque show que les seasons qu'ils ont cette année, s'ils en ont (à voir si on gagne vraiment des perfs ?)
-    const shows = (await loadData()).filter((_) =>
+    const year = parseInt(yearStr, 10);
+    const defaultShowsWithSeasons = (await loadData()).filter((_) =>
       DEFAULT_SHOWS_IDS.includes(_.serie.id)
     );
+    const seasons: SeasonWithShow[] = defaultShowsWithSeasons
+      .flatMap(({ serie, seasons }) =>
+        seasons.map((season) => ({ show: serie, ...season }))
+      )
+      .filter((_) => isTimeRangeInYear(_.time, year));
     return {
       props: {
-        shows,
+        seasons,
+        year,
       },
     };
   }
@@ -26,10 +33,18 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
 };
 
 function Page({
-  shows,
+  year,
+  seasons,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  // will resolve posts to type Data
-  return <p>shows : {shows.length}</p>;
+  return (
+    <div className="page container-fluid">
+      {/* <GlobalErrorBanner /> */}
+      {/* <AuthBar /> */}
+      {/* <About /> */}
+      {/* <CalendarBar /> */}
+      <CalendarCore {...{ year, seasons }} showRemoveButtons={false} />
+    </div>
+  );
 }
 
 export default Page;

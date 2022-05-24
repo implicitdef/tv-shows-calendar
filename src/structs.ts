@@ -1,7 +1,5 @@
 import { Moment } from "moment";
 
-type TimesType = string | Moment;
-
 export type Show = {
   id: number;
   name: string;
@@ -9,23 +7,23 @@ export type Show = {
 
 export type ShowAndSeasons = {
   serie: Show;
-  seasons: Season<string>[];
+  seasons: Season[];
 };
 
 export type SeasonWithShow = {
   show: Show;
   number: string;
-  time: TimeRange<Moment>;
+  time: TimeRange;
 };
 
-export type Season<T extends TimesType = Moment> = {
+export type Season = {
   number: string;
-  time: TimeRange<T>;
+  time: TimeRange;
 };
 
-export type TimeRange<T extends TimesType = Moment> = {
-  start: T;
-  end: T;
+export type TimeRange = {
+  start: string;
+  end: string;
 };
 
 export type DataFromDb = ShowAndSeasons[];
