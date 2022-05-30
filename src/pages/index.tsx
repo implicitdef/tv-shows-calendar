@@ -1,22 +1,18 @@
-import type { InferGetServerSidePropsType } from "next";
-import { loadData } from "../server.core";
+import moment from "moment";
+import * as yearPage from "./[year]";
 
 type Data = { message: string };
 
-export const getServerSideProps = async () => {
-  const data: Data = await loadData();
-
-  return {
-    props: {
-      data,
+export const getServerSideProps: typeof yearPage.getServerSideProps = (ctx) => {
+  return yearPage.getServerSideProps({
+    ...ctx,
+    params: {
+      ...ctx.params,
+      year: moment().year().toString(),
     },
-  };
+  });
 };
 
-function Page({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  // will resolve posts to type Data
-}
+const Page = yearPage.Page;
 
 export default Page;

@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
   // TODO then plus the frontend with a calendar and a bit of css
 };
 
-function Page({
+export function Page({
   year,
   seasons,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
