@@ -1,4 +1,6 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useState } from "react";
+import CalendarBar from "../components/calendar-bar/CalendarBar";
 import CalendarCore from "../components/calendar-core/CalendarCore";
 import { isTimeRangeInYear } from "../dateUtils";
 import { DEFAULT_SHOWS_IDS, loadData } from "../server.core";
@@ -41,7 +43,8 @@ export function Page({
       {/* <GlobalErrorBanner /> */}
       {/* <AuthBar /> */}
       {/* <About /> */}
-      {/* <CalendarBar /> */}
+      {/* TODO dynamise showAddShowButton based on auth */}
+      <CalendarBar {...{ year }} showAddShowButton={false} />
       <CalendarCore {...{ year, seasons }} showRemoveButtons={false} />
     </div>
   );
