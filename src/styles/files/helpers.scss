@@ -1,0 +1,11 @@
+/***** centers the content vertically and horizontally inside a div */
+.centering {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.padding-clean {
+  padding: 0;
+}

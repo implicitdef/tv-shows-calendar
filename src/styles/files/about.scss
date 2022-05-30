@@ -1,0 +1,19 @@
+.about {
+  border-radius: 5px;
+  background: #4baea9;
+  color: white;
+  margin: 5px auto;
+  padding: 5px 30px 5px 10px;
+  position: relative;
+
+  .about__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff !important;
+    cursor: pointer;
+  }
+}

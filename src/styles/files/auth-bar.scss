@@ -1,0 +1,22 @@
+.auth-bar {
+  color: #b0bec5;
+  padding: 0 10px;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+
+  & > * {
+    margin-left: 20px;
+  }
+
+  .auth-bar__button {
+    background: transparent;
+    border: 0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+}

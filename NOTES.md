@@ -21,3 +21,5 @@
 
         # pour lister les tables
         \d
+
+    tail -f /usr/local/var/log/postgres.log
