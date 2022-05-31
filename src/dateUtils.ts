@@ -3,8 +3,6 @@ import { TimeRange } from "./structs";
 
 export const range0_11 = Array.from(Array(12).keys());
 
-// TODO debug pourquoi j'ai une légère différence entre server et frontend sur les calculs de la propriété "left" (cf messages dans la console)
-
 // date : a momentjs object
 // returns the offset in percentage
 // of that date along the year
@@ -14,7 +12,8 @@ export function dateLeftOffset(date: string): number {
   const endOfYear = moment(date).endOf("year");
   const durationOfYear = endOfYear.diff(startOfYear);
   const diffFromStartOfYear = moment(date).diff(startOfYear);
-  return (100 * diffFromStartOfYear) / durationOfYear;
+  const res = (100 * diffFromStartOfYear) / durationOfYear;
+  return res;
 }
 
 // same thing from the end of the year

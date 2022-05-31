@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment, { Moment } from "moment";
 import * as React from "react";
 import Marker from "./Marker";
 import MonthsBackground from "./MonthsBackground";
@@ -9,12 +9,11 @@ import { SeasonWithShow } from "../../structs";
 
 const CalendarCore: React.FC<{
   year: number;
+  now: Moment;
   seasons: SeasonWithShow[];
   showRemoveButtons: boolean;
-}> = ({ year, seasons, showRemoveButtons }) => {
-  const now = moment();
-  const marker =
-    now.year() === year ? <Marker now={now.toISOString()} /> : null;
+}> = ({ year, seasons, now, showRemoveButtons }) => {
+  const marker = now.year() === year ? <Marker now={now} /> : null;
   return (
     <div className="calendar-core">
       <div className="col-12 calendar-core__inner">

@@ -1,3 +1,4 @@
+import moment from "moment";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useState } from "react";
 import CalendarBar from "../components/calendar-bar/CalendarBar";
@@ -6,7 +7,7 @@ import { isTimeRangeInYear } from "../dateUtils";
 import { DEFAULT_SHOWS_IDS, loadData } from "../server.core";
 import { SeasonWithShow, Show } from "../structs";
 
-type Data = { year: number; seasons: SeasonWithShow[] };
+type Data = { year: number; seasons: SeasonWithShow[]; now: string };
 
 export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
   const { year: yearStr } = context.params || {};
@@ -25,6 +26,7 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
       props: {
         seasons,
         year,
+        now: moment().toISOString(),
       },
     };
   }
@@ -37,6 +39,7 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
 export function Page({
   year,
   seasons,
+  now,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className="page container-fluid">
@@ -45,7 +48,11 @@ export function Page({
       {/* <About /> */}
       {/* TODO dynamise showAddShowButton based on auth */}
       <CalendarBar {...{ year }} showAddShowButton={false} />
-      <CalendarCore {...{ year, seasons }} showRemoveButtons={false} />
+      <CalendarCore
+        {...{ year, seasons }}
+        now={moment(now)}
+        showRemoveButtons={false}
+      />
     </div>
   );
 }

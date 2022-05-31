@@ -8,6 +8,5 @@ function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 
-console.log("some stuff");
 
 export default MyApp;
