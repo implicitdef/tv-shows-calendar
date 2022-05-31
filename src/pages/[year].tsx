@@ -3,6 +3,9 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useState } from "react";
 import CalendarBar from "../components/calendar-bar/CalendarBar";
 import CalendarCore from "../components/calendar-core/CalendarCore";
+import About from "../components/meta/About";
+import AuthBar from "../components/meta/AuthBar";
+import GlobalErrorBanner from "../components/meta/GlobalErrorBanner";
 import { isTimeRangeInYear } from "../dateUtils";
 import { DEFAULT_SHOWS_IDS, loadData } from "../server.core";
 import { SeasonWithShow, Show } from "../structs";
@@ -41,12 +44,12 @@ export function Page({
   seasons,
   now,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  // TODO dynamise all these props properly
   return (
     <div className="page container-fluid">
-      {/* <GlobalErrorBanner /> */}
-      {/* <AuthBar /> */}
-      {/* <About /> */}
-      {/* TODO dynamise showAddShowButton based on auth */}
+      <GlobalErrorBanner hasError={true} />
+      <AuthBar {...{ loggedInStatus: "loggedOut", email: null }} />
+      <About {...{ isDisplayed: false }} />
       <CalendarBar {...{ year }} showAddShowButton={false} />
       <CalendarCore
         {...{ year, seasons }}
