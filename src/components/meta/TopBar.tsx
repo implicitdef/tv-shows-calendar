@@ -96,7 +96,6 @@ const AuthForm = ({ onSignin }: { onSignin: (email: string) => void }) => {
 };
 
 export function TopBar() {
-  const [showEmailForm, setShowEmailForm] = useState(false);
   const [status, setStatus] = useState<User | "loggedOut" | "unknown">(
     "unknown"
   );
@@ -141,15 +140,17 @@ export function TopBar() {
   };
   return (
     <div className="auth-bar">
+      <Link href="/">
+        <a className="auth-bar__button">home</a>
+      </Link>
       <Link href="/about">
         <a className="auth-bar__button">about</a>
       </Link>
       {status === "loggedOut" && (
-        <a className="auth-bar__button" onClick={() => setShowEmailForm(true)}>
-          sign up / sign in
-        </a>
+        <Link href="/signin">
+          <a className="auth-bar__button">sign up / sign in</a>
+        </Link>
       )}
-      {showEmailForm && <AuthForm {...{ onSignin }} />}
       {isSignedIn && (
         <>
           <span>{status.email}</span>
