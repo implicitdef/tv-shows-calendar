@@ -7,7 +7,7 @@ import { EmailForm } from "../components/meta/EmailForm";
 export function Page() {
   return (
     <Layout>
-      <EmailForm onSubmit={onSigninSubmit} type="signin" />
+      <EmailForm onSubmit={onSigninSubmit} type="confirm_email" />
     </Layout>
   );
 }
