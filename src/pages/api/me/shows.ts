@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getConnectedUserId } from "../../../client.auth";
 import { loadData } from "../../../server.core";
 import { getDb } from "../../../server.db";
 

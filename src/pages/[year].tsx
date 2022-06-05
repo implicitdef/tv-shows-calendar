@@ -1,10 +1,8 @@
 import moment from "moment";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useState } from "react";
 import CalendarBar from "../components/calendar-bar/CalendarBar";
 import CalendarCore from "../components/calendar-core/CalendarCore";
 import { Layout } from "../components/Layout";
-import GlobalErrorBanner from "../components/meta/GlobalErrorBanner";
 import { isTimeRangeInYear } from "../dateUtils";
 import { DEFAULT_SHOWS_IDS, loadData } from "../server.core";
 import { SeasonWithShow, Show } from "../structs";
@@ -34,8 +32,6 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
   }
   // TODO faire une not found ici (attention il parait que ça peut exploser les types ?)
   throw new Error("missing year parameter");
-  // TODO then use the data from db, get the correct series and seasons and so on, and display them roughly
-  // TODO then plus the frontend with a calendar and a bit of css
 };
 
 export function Page({
@@ -43,7 +39,6 @@ export function Page({
   seasons,
   now,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  // TODO dynamise all these props properly
   return (
     <Layout>
       <CalendarBar {...{ year }} showAddShowButton={false} />
