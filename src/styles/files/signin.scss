@@ -3,15 +3,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding-bottom: 20px;
 
   h1 {
     font-size: 1.2em;
   }
 
   button {
-    min-width: 100px;
+    // min-width: 100px;
     margin-left: 5px;
+  }
+  input {
+    padding: 0 4px;
   }
 
   & > div {
@@ -25,6 +28,16 @@
 
   p {
     max-width: 500px;
+  }
+
+  .email-form__error, .email-form__success {
+    padding: 5px;
+  }
+  .email-form__error {
+    background: darkred;
+  }
+  .email-form__success {
+    background: darkgreen;
   }
 }
   

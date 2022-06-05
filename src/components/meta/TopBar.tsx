@@ -13,7 +13,6 @@ import {
 import { initializeApp } from "firebase/app";
 import Link from "next/link";
 
-const LOCAL_STORAGE_EMAIL = "emailForSignIn";
 
 // Doc : https://firebase.google.com/docs/auth/web/email-link-auth
 
@@ -73,28 +72,6 @@ function handleArrivalFromSigninLink() {
   }
 }
 
-const AuthForm = ({ onSignin }: { onSignin: (email: string) => void }) => {
-  const [email, setEmail] = useState("");
-  return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSignin(email);
-      }}
-    >
-      <label htmlFor="funk">
-        Your email :
-        <input
-          value={email}
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <button type="submit">OK</button>
-    </form>
-  );
-};
-
 export function TopBar() {
   const [status, setStatus] = useState<User | "loggedOut" | "unknown">(
     "unknown"
@@ -113,30 +90,18 @@ export function TopBar() {
     });
   }, [setStatus]);
 
-  const onSignin = (email: string) => {
+  const onSigninSubmit = async (email: string): Promise<void> => {
     console.log("@@@ on signin");
     const auth = getAuth();
     console.log("@@@ sendSignInLinkToEmail", email);
 
-    sendSignInLinkToEmail(auth, email, {
+    await sendSignInLinkToEmail(auth, email, {
       // The domain has to be authorized in the Firebase Console
       url: `http://${window.location.host}/`,
       handleCodeInApp: true,
-    })
-      .then(() => {
-        // TODO Inform the user.
-        console.log("@@@ signin email sent");
-        // If the user opens the link on the same device, we won't have to ask for the email again
-        window.localStorage.setItem(LOCAL_STORAGE_EMAIL, email);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // TODO handle error
-        console.error("@@@ ici error");
-        console.error(error);
-        // ..
-      });
+    });
+    // If the user opens the link on the same device, we won't have to ask for the email again
+    window.localStorage.setItem(LOCAL_STORAGE_EMAIL, email);
   };
   return (
     <div className="auth-bar">
