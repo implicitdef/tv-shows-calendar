@@ -1,3 +1,11 @@
+- annuler firebase et remplacer par de l'auth fait maison :
+    - step 1 : regarder comment faire email/password proprement en 2022, JWT, etc. comment envoyer les emails, etc. 
+    - step 2 : architecturer tout le truc, lister les écrans et endpoints et de quoi j'ai besoin
+    - step 3 : il faut brancher un truc de mails, sengrid etc.
+    - step 4 : écrire la table SQL
+    - step 5 : écrire toutes les fonctionnalités, en mode pure fonctions
+    - step 6 : écrire tous les components, avec les formulaires et gestion d'erreurs etc.
+    - step 7 : brancher tout et tester
 - Brancher le front en mode non-authenticated
 - Puis faire l'auth avec iron session (essayer)
 - Puis faire une passe sur les endpoints, il y en a qui seront devenus inutiles
