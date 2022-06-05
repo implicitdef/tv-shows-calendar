@@ -3,8 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useState } from "react";
 import CalendarBar from "../components/calendar-bar/CalendarBar";
 import CalendarCore from "../components/calendar-core/CalendarCore";
-import About from "../components/meta/About";
-import AuthBar from "../components/meta/AuthBar";
+import { Layout } from "../components/Layout";
 import GlobalErrorBanner from "../components/meta/GlobalErrorBanner";
 import { isTimeRangeInYear } from "../dateUtils";
 import { DEFAULT_SHOWS_IDS, loadData } from "../server.core";
@@ -46,17 +45,14 @@ export function Page({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   // TODO dynamise all these props properly
   return (
-    <div className="page container-fluid">
-      <GlobalErrorBanner hasError={false} />
-      <AuthBar {...{ loggedInStatus: "loggedOut", email: null }} />
-      <About {...{ isDisplayed: false }} />
+    <Layout>
       <CalendarBar {...{ year }} showAddShowButton={false} />
       <CalendarCore
         {...{ year, seasons }}
         now={moment(now)}
         showRemoveButtons={false}
       />
-    </div>
+    </Layout>
   );
 }
 

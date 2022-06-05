@@ -15,11 +15,11 @@ export default function CalendarBar({
       <div className="col-md-3 col-sm-6">{searchBoxOrNot}</div>
       <div className="calendar-bar__nav col-md-6 col-sm-6">
         <Link href={`/${year - 1}`}>
-          <a className="calendar-bar__back">{"<"}</a>
+          <span className="calendar-bar__back">{"⬅️"}</span>
         </Link>
         <span className="calendar-bar__year">{year}</span>
         <Link href={`/${year + 1}`}>
-          <a className="calendar-bar__forward">{">"}</a>
+          <span className="calendar-bar__forward">{"➡️"}</span>
         </Link>
       </div>
     </div>

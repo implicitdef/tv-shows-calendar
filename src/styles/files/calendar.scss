@@ -16,17 +16,18 @@
   }
 
   .calendar-core__marker {
-    $marker-color: #b0bec5;
+    // $marker-color: #b0bec5;
+    $marker-color: #4cf0ff;
 
     @extend .absolute-box;
     z-index: 80;
     width: 10px;
     &::before {
       @extend .absolute-box;
-      content: 'now';
+      content: 'today';
       color: $marker-color;
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1rem;
       width: 100%;
       position: absolute;
       height: 20px;

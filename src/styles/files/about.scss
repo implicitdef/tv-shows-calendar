@@ -16,4 +16,12 @@
     color: #ffffff !important;
     cursor: pointer;
   }
+
+  .about__link-container {
+    display:flex;
+    justify-content: center;
+    padding-top:20px;
+    a {
+    }
+  }
 }
