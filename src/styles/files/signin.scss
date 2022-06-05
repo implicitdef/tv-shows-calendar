@@ -1,4 +1,30 @@
-.auth-popin {
-    background: 'orange';
+.email-form {
+  @extend .basic-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  h1 {
+    font-size: 1.2em;
   }
+
+  button {
+    min-width: 100px;
+    margin-left: 5px;
+  }
+
+  & > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    & > * {
+      flex-grow: 1;
+    }
+  }
+
+  p {
+    max-width: 500px;
+  }
+}
   

@@ -9,3 +9,13 @@
 .padding-clean {
   padding: 0;
 }
+
+// shared by the "about" and signin form
+.basic-block {
+  border-radius: 5px;
+  background: #4baea9;
+  color: white;
+  margin: 5px auto;
+  padding: 5px 30px 5px 10px;
+
+}
