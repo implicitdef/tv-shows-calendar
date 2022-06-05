@@ -22,7 +22,11 @@ export const EmailForm = ({
           await onSubmit(email);
           setDisplaySuccess(true);
         } catch (e) {
-          if (e instanceof FirebaseError && e.code === "auth/invalid-email") {
+          if (
+            type === "signin" &&
+            e instanceof FirebaseError &&
+            e.code === "auth/invalid-email"
+          ) {
             setErrorMessage("Invalid email");
           } else {
             console.error(e);
@@ -44,7 +48,9 @@ export const EmailForm = ({
       </div>
       {displaySuccess && (
         <p className="email-form__success">
-          Email sent ! Click the link you received.
+          {type === "signin"
+            ? "Email sent ! Click the link you received."
+            : "OK, you'll be signed in shortly"}
         </p>
       )}
       {errorMessage && <p className="email-form__error"> {errorMessage}</p>}

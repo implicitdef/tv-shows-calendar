@@ -1,0 +1,9 @@
+.signin-failed {
+  @extend .basic-block;
+
+  .signin-failed__error {
+    padding: 5px;
+    background: darkred;
+  }
+}
+  
