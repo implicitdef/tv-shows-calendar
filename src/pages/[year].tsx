@@ -47,7 +47,7 @@ export function Page({
   // TODO dynamise all these props properly
   return (
     <div className="page container-fluid">
-      <GlobalErrorBanner hasError={true} />
+      <GlobalErrorBanner hasError={false} />
       <AuthBar {...{ loggedInStatus: "loggedOut", email: null }} />
       <About {...{ isDisplayed: false }} />
       <CalendarBar {...{ year }} showAddShowButton={false} />
