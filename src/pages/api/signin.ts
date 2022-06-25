@@ -1,16 +1,14 @@
 import type { NextApiRequest } from 'next'
 import {
-    MyNextApiResponse,
+    generateJWT,
+    MyApiResponse,
     parseEmailPasswordBody,
     sendError,
     sendOk,
-} from '../../server.apiUtils'
+} from '../../server.httpUtils'
 import { signIn } from '../../server.users'
 
-export default async function handler(
-    req: NextApiRequest,
-    res: MyNextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: MyApiResponse) {
     if (req.method !== 'POST') {
         return sendError(res, 404, 'not found')
     }
@@ -22,7 +20,6 @@ export default async function handler(
     if (result === 'wrong_email_or_password') {
         return sendError(res, 401, 'invalid email or password')
     }
-
-    // TODO send JWT (with set cookie header). NOT http only.
-    res.sendOk(res)
+    res.setHeader('Set-Cookie', `jwt=${generateJWT(result)}`)
+    sendOk(res)
 }

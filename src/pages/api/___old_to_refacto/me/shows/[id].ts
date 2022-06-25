@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getConnectedUserId } from '../../../../client.auth'
-import { getDb } from '../../../../server.db'
+import { getConnectedUserId } from '../../../../../client.auth'
+import { getDb } from '../../../../../server.db'
 
 export default async function handler(
     req: NextApiRequest,

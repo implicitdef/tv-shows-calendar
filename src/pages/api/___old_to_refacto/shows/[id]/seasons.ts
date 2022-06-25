@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { loadData } from '../../../../server.core'
-import { Season } from '../../../../structs'
+import { loadData } from '../../../../../server.core'
+import { Season } from '../../../../../structs'
 
 export default async function handler(
     req: NextApiRequest,
