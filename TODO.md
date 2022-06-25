@@ -1,18 +1,8 @@
--   prettier : augmenter l'espacement à 4
 -   annuler firebase et remplacer par de l'auth fait maison :
 
     -   step 1 : regarder comment faire email/password proprement en 2022, JWT, etc. comment envoyer les emails, etc.
-        https://www.authgear.com/post/web-application-authentication-best-practices
-        https://www.authgear.com/post/authentication-security-password-reset-best-practices-and-more
 
-        save the salt with the hash
-        pbkdf2 !
-        https://nodejs.org/api/crypto.html#cryptopbkdf2password-salt-iterations-keylen-digest-callback
-
-        https://security.stackexchange.com/questions/17994/with-pbkdf2-what-is-an-optimal-hash-size-in-bytes-what-about-the-size-of-the-s
-
-        iron-session
-
+        utiliser jwt avec cette lib https://github.com/panva/jose/blob/main/docs/classes/jwt_sign.SignJWT.md#readme
         regexp pour email : https://dba.stackexchange.com/questions/68266/what-is-the-best-way-to-store-an-email-address-in-postgresql
 
 -   step 2 : architecturer tout le truc, lister les écrans et endpoints et de quoi j'ai besoin DONE
