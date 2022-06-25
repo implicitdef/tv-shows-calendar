@@ -9,7 +9,9 @@ CREATE TABLE raw_json_data (
 
 CREATE TABLE users (
   id SERIAL,
-  google_user_id TEXT NOT NULL,
+  email CITEXT NOT NULL,
+  password_hash TEXT NOT NULL,
+  salt TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   PRIMARY KEY (id)
 );

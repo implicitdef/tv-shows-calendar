@@ -9,7 +9,9 @@ type Database = {
   };
   users: {
     id: Generated<number>;
-    google_user_id: string;
+    email: string;
+    password_hash: string;
+    salt: string;
     created_at: ColumnType<Date, Date | undefined, never>;
   };
   users_series: {
