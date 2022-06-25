@@ -7,13 +7,15 @@ CREATE TABLE raw_json_data (
   creation_time TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE EXTENSION citext;
 CREATE TABLE users (
   id SERIAL,
   email CITEXT NOT NULL,
   password_hash TEXT NOT NULL,
   salt TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  CONSTRAINT email_unique UNIQUE (email)
 );
 
 CREATE TABLE users_series (

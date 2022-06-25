@@ -1,3 +1,4 @@
+- prettier : augmenter l'espacement à 4
 - annuler firebase et remplacer par de l'auth fait maison :
 
   - step 1 : regarder comment faire email/password proprement en 2022, JWT, etc. comment envoyer les emails, etc.
