@@ -1,11 +1,11 @@
 .about {
-  @extend .basic-block;
+    @extend .basic-block;
 
-  .about__link-container {
-    display:flex;
-    justify-content: center;
-    padding-top:20px;
-    a {
+    .about__link-container {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        a {
+        }
     }
-  }
 }

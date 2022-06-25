@@ -1,43 +1,43 @@
 .email-form {
-  @extend .basic-block;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 20px;
-
-  h1 {
-    font-size: 1.2em;
-  }
-
-  button {
-    // min-width: 100px;
-    margin-left: 5px;
-  }
-  input {
-    padding: 0 4px;
-  }
-
-  & > div {
-    width: 100%;
+    @extend .basic-block;
     display: flex;
-    justify-content: space-evenly;
-    & > * {
-      flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+
+    h1 {
+        font-size: 1.2em;
     }
-  }
 
-  p {
-    max-width: 500px;
-  }
+    button {
+        // min-width: 100px;
+        margin-left: 5px;
+    }
+    input {
+        padding: 0 4px;
+    }
 
-  .email-form__error, .email-form__success {
-    padding: 5px;
-  }
-  .email-form__error {
-    background: darkred;
-  }
-  .email-form__success {
-    background: darkgreen;
-  }
+    & > div {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        & > * {
+            flex-grow: 1;
+        }
+    }
+
+    p {
+        max-width: 500px;
+    }
+
+    .email-form__error,
+    .email-form__success {
+        padding: 5px;
+    }
+    .email-form__error {
+        background: darkred;
+    }
+    .email-form__success {
+        background: darkgreen;
+    }
 }
-  

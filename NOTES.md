@@ -1,9 +1,7 @@
 # Usage
 
-
     # en local
     yarn dev
-
 
 ## Various useful commands for local postgres
 
@@ -15,7 +13,7 @@
 
         # pour lister les dbs
         \l
-        
+
         # pour se connecter à la DB tv_shows_calendar
         \c tv_shows_calendar
 

@@ -1,29 +1,29 @@
-import { Moment } from "moment";
+import { Moment } from 'moment'
 
 export type Show = {
-  id: number;
-  name: string;
-};
+    id: number
+    name: string
+}
 
 export type ShowAndSeasons = {
-  serie: Show;
-  seasons: Season[];
-};
+    serie: Show
+    seasons: Season[]
+}
 
 export type SeasonWithShow = {
-  show: Show;
-  number: string;
-  time: TimeRange;
-};
+    show: Show
+    number: string
+    time: TimeRange
+}
 
 export type Season = {
-  number: string;
-  time: TimeRange;
-};
+    number: string
+    time: TimeRange
+}
 
 export type TimeRange = {
-  start: string;
-  end: string;
-};
+    start: string
+    end: string
+}
 
-export type DataFromDb = ShowAndSeasons[];
+export type DataFromDb = ShowAndSeasons[]

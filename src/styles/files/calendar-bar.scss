@@ -1,63 +1,63 @@
 .calendar-bar {
-  color: white;
-  margin-bottom: 20px;
-  .calendar-bar__nav {
-    display: flex;
-    justify-content: center;
+    color: white;
+    margin-bottom: 20px;
+    .calendar-bar__nav {
+        display: flex;
+        justify-content: center;
 
-    .calendar-bar__year {
-      font-size: 2.5rem;
-      margin: 0 10px;
-      height: 100%;
-    }
-
-    .calendar-bar__back,
-    .calendar-bar__forward {
-      @extend .centering;
-      cursor: pointer;
-      font-size: 1.7rem;
-      user-select: none;
-    }
-  }
-
-  .search-box {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    .search-box__input {
-      height: 70%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid white;
-      color: white;
-      padding: 0 15px;
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .search-box__results {
-      position: relative;
-      .search-box__results-inner {
-        @extend .padding-clean;
-        width: 100%;
-        position: absolute;
-        li {
-          list-style-type: none;
-          display: block;
-          font-size: 1rem;
-          padding: 10px 15px;
-          cursor: pointer;
-          background: white;
-          color: black;
-          position: relative;
-          z-index: 1500;
-          &:hover {
-            background: lightgray;
-          }
+        .calendar-bar__year {
+            font-size: 2.5rem;
+            margin: 0 10px;
+            height: 100%;
         }
-      }
+
+        .calendar-bar__back,
+        .calendar-bar__forward {
+            @extend .centering;
+            cursor: pointer;
+            font-size: 1.7rem;
+            user-select: none;
+        }
     }
-  }
+
+    .search-box {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .search-box__input {
+            height: 70%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid white;
+            color: white;
+            padding: 0 15px;
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .search-box__results {
+            position: relative;
+            .search-box__results-inner {
+                @extend .padding-clean;
+                width: 100%;
+                position: absolute;
+                li {
+                    list-style-type: none;
+                    display: block;
+                    font-size: 1rem;
+                    padding: 10px 15px;
+                    cursor: pointer;
+                    background: white;
+                    color: black;
+                    position: relative;
+                    z-index: 1500;
+                    &:hover {
+                        background: lightgray;
+                    }
+                }
+            }
+        }
+    }
 }
