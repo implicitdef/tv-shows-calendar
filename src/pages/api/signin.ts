@@ -23,6 +23,6 @@ export default async function handler(
         return sendError(res, 401, 'invalid email or password')
     }
 
-    // TODO send JWT
-    sendOk(res)
+    // TODO send JWT (with set cookie header). NOT http only.
+    res.sendOk(res)
 }

@@ -1,4 +1,6 @@
 import { NextApiResponse } from 'next'
+import * as jwt from 'jsonwebtoken'
+import { JWT_SECRET } from './server.conf'
 
 export type MyNextApiResponse = NextApiResponse<{ message: string }>
 
@@ -28,5 +30,15 @@ export function parseEmailPasswordBody(
     return 'invalid'
 }
 
+export function generateJWT(userId: number): string {
+    return jwt.sign({ sub: userId }, JWT_SECRET)
+}
 
-
+export function verifyJWT(token: string): { userId: number } | 'invalid' {
+    try {
+        const payload = jwt.verify(token, JWT_SECRET)
+        return { userId: (payload as any).sub as number }
+    } catch (err) {
+        return 'invalid'
+    }
+}

@@ -14,9 +14,11 @@
         "pretty": "prettier --write ."
     },
     "dependencies": {
+        "@types/jsonwebtoken": "^8.5.8",
         "@types/pg": "^8.6.5",
         "firebase": "^9.8.2",
         "google-auth-library": "^8.0.2",
+        "jsonwebtoken": "^8.5.1",
         "knex": "^2.0.0",
         "kysely": "^0.19.2",
         "moment": "^2.29.3",
