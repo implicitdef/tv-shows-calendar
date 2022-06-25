@@ -1,13 +1,11 @@
-import { FirebaseError } from 'firebase/app'
-import { useState } from 'react'
+import { callSignin } from '../client.api'
 import { Layout } from '../components/Layout'
-import { onSigninSubmit } from '../client.auth'
 import { EmailForm } from '../components/meta/EmailForm'
 
 export function Page() {
     return (
         <Layout>
-            <EmailForm onSubmit={onSigninSubmit} type="signin" />
+            <EmailForm onSubmit={callSignin} type="signin" />
         </Layout>
     )
 }

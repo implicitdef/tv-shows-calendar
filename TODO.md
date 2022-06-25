@@ -21,9 +21,9 @@
     -   dans la page [year], check la session et renvoyer des données différentes si besoin
     <!-- - step 3 : il faut brancher un truc de mails, sengrid etc. NON PAS BESOIN DE MAIL -->
 -   step 4 : écrire la table SQL -- DONE
--   step 5 : écrire toutes les fonctionnalités, en mode pure fonctions
+-   step 5 : écrire toutes les fonctionnalités, en mode pure fonctions ---- DONE
 -   step 6 : écrire tous les components, avec les formulaires et gestion d'erreurs etc.
--   step 6.5 : supprimer tout firebase, même supprimer l'app dans la console web Firebase
+-   step 6.5 : supprimer tout firebase, même supprimer l'app dans la console web Firebase --- DONE
 -   step 7 : brancher tout et tester
 
 -   Brancher le front en mode non-authenticated

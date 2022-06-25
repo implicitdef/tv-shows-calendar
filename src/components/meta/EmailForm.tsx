@@ -1,14 +1,17 @@
-import { FirebaseError } from 'firebase/app'
 import { useState } from 'react'
+import { EmailAndPassword } from '../../client.api'
 
 export const EmailForm = ({
     onSubmit,
     type,
 }: {
-    onSubmit: (email: string) => Promise<void>
-    type: 'signin' | 'confirm_email'
+    onSubmit: (
+        _: EmailAndPassword,
+    ) => Promise<'ok' | 'wrong_email_or_password' | 'email_taken'>
+    type: 'signin' | 'signup'
 }) => {
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [displaySuccess, setDisplaySuccess] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     return (
@@ -18,20 +21,13 @@ export const EmailForm = ({
                 e.preventDefault()
                 setErrorMessage(null)
                 setDisplaySuccess(false)
-                try {
-                    await onSubmit(email)
+                const res = await onSubmit({ email, password })
+                if (res === 'ok') {
                     setDisplaySuccess(true)
-                } catch (e) {
-                    if (
-                        type === 'signin' &&
-                        e instanceof FirebaseError &&
-                        e.code === 'auth/invalid-email'
-                    ) {
-                        setErrorMessage('Invalid email')
-                    } else {
-                        console.error(e)
-                        setErrorMessage('Something went wrong, sorry')
-                    }
+                } else if (res === 'wrong_email_or_password') {
+                    setErrorMessage('Wrong email or password')
+                } else {
+                    setErrorMessage('Email already registered')
                 }
             }}
         >
@@ -46,6 +42,12 @@ export const EmailForm = ({
                     type="email"
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                <input
+                    value={password}
+                    placeholder="Your password here"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
                 <button type="submit">OK</button>
             </div>
             {displaySuccess && (
@@ -58,11 +60,6 @@ export const EmailForm = ({
             {errorMessage && (
                 <p className="email-form__error"> {errorMessage}</p>
             )}
-            <p>
-                {type === 'signin'
-                    ? 'No password needed. We will send you an email with a link. You will have to click that link to prove that you own this email adress.'
-                    : "You clicked the signin link from a different device or browser. That's ok, we just need you to type in the same email address just one more time to be sure."}
-            </p>
         </form>
     )
 }

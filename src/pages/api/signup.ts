@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: MyApiResponse) {
     }
     const result = await signUp(bodyParsed)
     if (result === 'email_taken') {
-        return sendError(res, 400, 'email taken')
+        return sendError(res, 400, 'email_taken')
     }
     sendOk(res)
 }

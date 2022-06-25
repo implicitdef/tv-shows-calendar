@@ -10,15 +10,15 @@ import { signIn } from '../../server.users'
 
 export default async function handler(req: NextApiRequest, res: MyApiResponse) {
     if (req.method !== 'POST') {
-        return sendError(res, 404, 'not found')
+        return sendError(res, 404, 'not_found')
     }
     const bodyParsed = parseEmailPasswordBody(req.body)
     if (bodyParsed === 'invalid') {
-        return sendError(res, 400, 'invalid body')
+        return sendError(res, 400, 'invalid_body')
     }
     const result = await signIn(bodyParsed)
     if (result === 'wrong_email_or_password') {
-        return sendError(res, 401, 'invalid email or password')
+        return sendError(res, 401, 'wrong_email_or_password')
     }
     res.setHeader('Set-Cookie', `jwt=${generateJWT(result)}`)
     sendOk(res)

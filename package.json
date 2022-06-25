@@ -16,7 +16,6 @@
     "dependencies": {
         "@types/jsonwebtoken": "^8.5.8",
         "@types/pg": "^8.6.5",
-        "firebase": "^9.8.2",
         "google-auth-library": "^8.0.2",
         "jsonwebtoken": "^8.5.1",
         "knex": "^2.0.0",
