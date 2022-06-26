@@ -14,8 +14,10 @@
         "pretty": "prettier --write ."
     },
     "dependencies": {
+        "@types/cookie": "^0.5.1",
         "@types/jsonwebtoken": "^8.5.8",
         "@types/pg": "^8.6.5",
+        "cookie": "^0.5.0",
         "google-auth-library": "^8.0.2",
         "jsonwebtoken": "^8.5.1",
         "knex": "^2.0.0",

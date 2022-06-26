@@ -5,14 +5,14 @@ import CalendarCore from '../components/calendar-core/CalendarCore'
 import { Layout } from '../components/Layout'
 import { isTimeRangeInYear } from '../dateUtils'
 import { DEFAULT_SHOWS_IDS, loadData } from '../server.core'
-import { getUserId } from '../server.httpUtils'
+import { readUserIdFromRequest } from '../server.httpUtils'
 import { SeasonWithShow, Show } from '../structs'
 
 type Data = { year: number; seasons: SeasonWithShow[]; now: string }
 
 export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
     const { params, req } = context
-    const userId = getUserId(req)
+    const userId = readUserIdFromRequest(req)
     console.log('@@@ found userId : ', userId)
     // TODO si userid, aller chercher les bonnes données à afficher
     const { year: yearStr } = params || {}

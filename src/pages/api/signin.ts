@@ -5,6 +5,7 @@ import {
     parseEmailPasswordBody,
     sendError,
     sendOk,
+    setJWTCookieInResponse,
 } from '../../server.httpUtils'
 import { signIn } from '../../server.users'
 
@@ -20,12 +21,6 @@ export default async function handler(req: NextApiRequest, res: MyApiResponse) {
     if (result === 'wrong_email_or_password') {
         return sendError(res, 401, 'wrong_email_or_password')
     }
-    const _365DaysInSeconds = 365 * 24 * 60 * 60
-    res.setHeader(
-        'Set-Cookie',
-        `jwt=${generateJWT(
-            result,
-        )}; Max-Age=${_365DaysInSeconds}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-    )
+    setJWTCookieInResponse(res, result)
     sendOk(res)
 }

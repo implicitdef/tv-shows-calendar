@@ -2,6 +2,7 @@ import { NextApiResponse } from 'next'
 import * as jwt from 'jsonwebtoken'
 import { JWT_SECRET } from './server.conf'
 import { IncomingHttpHeaders, IncomingMessage } from 'http'
+import cookie from 'cookie'
 
 export type MyApiResponse = NextApiResponse<{ message: string }>
 
@@ -42,22 +43,27 @@ function verifyJWT(token: string): { userId: number } | 'invalid' {
     }
 }
 
-function parseAuthorizationHeader(req: IncomingMessage): string | null {
-    const authorization = req.headers.authorization || ''
-    const prefix = 'Bearer '
-    if (authorization.startsWith(prefix)) {
-        return authorization.substring(prefix.length)
-    }
-    return null
-}
-
-export function getUserId(req: IncomingMessage): number | null {
-    const token = parseAuthorizationHeader(req)
-    if (token) {
-        const result = verifyJWT(token)
+export function readUserIdFromRequest(req: IncomingMessage): number | null {
+    const { jwt } = cookie.parse(req.headers.cookie || '') as { jwt?: string }
+    if (jwt) {
+        const result = verifyJWT(jwt)
         if (result !== 'invalid') {
             return result.userId
         }
     }
     return null
+}
+
+export function setJWTCookieInResponse(res: MyApiResponse, userId: number) {
+    const _365DaysInSeconds = 365 * 24 * 60 * 60
+    res.setHeader(
+        'Set-Cookie',
+        cookie.serialize('jwt', generateJWT(userId), {
+            httpOnly: true,
+            maxAge: _365DaysInSeconds,
+            path: '/',
+            secure: true,
+            sameSite: 'strict',
+        }),
+    )
 }
