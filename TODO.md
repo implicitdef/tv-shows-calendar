@@ -1,8 +1,9 @@
 -   annuler firebase et remplacer par de l'auth fait maison :
+    -   step 8 : implementer le signout
+    -   step 10 : le form de signin/signup doit rediriger vers la home si successful
+    -   refuser empty password (ça fera un message d'erreur à gérer !)
+    -   refuser email invalid (ça fera un message d'erreur à gérer !)
     -   step 7 : brancher tout et tester
-    -   step 8 : ajuster la TopBar (afficher utilisteur, bouton logout). Avec infos de session venant du backend ! pas besoin de lire le cookie.
-    -   step 9 : le signup doit poser le JWT
--   step 10 : le form de signin/signup doit rediriger vers la home si successful
 -   Brancher le front en mode non-authenticated
 -   Puis faire l'auth avec iron session (essayer)
 -   Puis faire une passe sur les endpoints, il y en a qui seront devenus inutiles

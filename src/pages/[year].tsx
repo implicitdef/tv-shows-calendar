@@ -5,16 +5,20 @@ import CalendarCore from '../components/calendar-core/CalendarCore'
 import { Layout } from '../components/Layout'
 import { isTimeRangeInYear } from '../dateUtils'
 import { DEFAULT_SHOWS_IDS, loadData } from '../server.core'
-import { readUserIdFromRequest } from '../server.httpUtils'
+import { BasePageData, readUserFromRequest } from '../server.httpUtils'
+import { getEmailOf } from '../server.users'
 import { SeasonWithShow, Show } from '../structs'
 
-type Data = { year: number; seasons: SeasonWithShow[]; now: string }
+type Data = BasePageData & {
+    year: number
+    seasons: SeasonWithShow[]
+    now: string
+}
 
 export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
     const { params, req } = context
-    const userId = readUserIdFromRequest(req)
-    console.log('@@@ found userId : ', userId)
-    // TODO si userid, aller chercher les bonnes données à afficher
+    const user = await readUserFromRequest(req)
+    // TODO si user, aller chercher les bonnes données à afficher
     const { year: yearStr } = params || {}
     if (yearStr && typeof yearStr === 'string') {
         // TODO gérer si pas un number
@@ -32,6 +36,7 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
                 seasons,
                 year,
                 now: moment().toISOString(),
+                userEmail: user && user.userEmail,
             },
         }
     }
@@ -43,9 +48,10 @@ export function Page({
     year,
     seasons,
     now,
+    userEmail,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
-        <Layout>
+        <Layout {...{ userEmail }}>
             <CalendarBar {...{ year }} showAddShowButton={false} />
             <CalendarCore
                 {...{ year, seasons }}

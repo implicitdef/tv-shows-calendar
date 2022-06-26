@@ -1,10 +1,25 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { Layout } from '../components/Layout'
+import { BasePageData, readUserFromRequest } from '../server.httpUtils'
 
-// TODO add a way to go back to HP
-export function Page() {
+type Data = BasePageData
+
+export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
+    const { params, req } = context
+    const user = await readUserFromRequest(req)
+    return {
+        props: {
+            userEmail: user && user.userEmail,
+        },
+    }
+}
+
+export function Page({
+    userEmail,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
-        <Layout>
+        <Layout {...{ userEmail }}>
             <div className="about">
                 <p>
                     This calendar helps you keep track of when your favorites TV

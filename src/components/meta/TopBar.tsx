@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-export function TopBar() {
-    const user = null
+export function TopBar({ userEmail }: { userEmail: string | null }) {
     return (
         <div className="auth-bar">
             <Link href="/">
@@ -11,19 +10,19 @@ export function TopBar() {
             <Link href="/about">
                 <a className="auth-bar__button">about</a>
             </Link>
-            {!user && (
+            {!userEmail && (
                 <Link href="/signup">
                     <a className="auth-bar__button">sign up</a>
                 </Link>
             )}
-            {!user && (
+            {!userEmail && (
                 <Link href="/signin">
                     <a className="auth-bar__button">sign in</a>
                 </Link>
             )}
-            {user && (
+            {userEmail && (
                 <>
-                    <span>TODO@GMAIL.com</span>
+                    <span>{userEmail}</span>
                     <a className="auth-bar__button" onClick={() => {}}>
                         sign out
                     </a>

@@ -1,8 +1,9 @@
 import { NextApiResponse } from 'next'
 import * as jwt from 'jsonwebtoken'
 import { JWT_SECRET } from './server.conf'
-import { IncomingHttpHeaders, IncomingMessage } from 'http'
+import { IncomingMessage } from 'http'
 import cookie from 'cookie'
+import { getEmailOf } from './server.users'
 
 export type MyApiResponse = NextApiResponse<{ message: string }>
 
@@ -43,12 +44,16 @@ function verifyJWT(token: string): { userId: number } | 'invalid' {
     }
 }
 
-export function readUserIdFromRequest(req: IncomingMessage): number | null {
+export async function readUserFromRequest(
+    req: IncomingMessage,
+): Promise<{ userId: number; userEmail: string } | null> {
     const { jwt } = cookie.parse(req.headers.cookie || '') as { jwt?: string }
     if (jwt) {
         const result = verifyJWT(jwt)
         if (result !== 'invalid') {
-            return result.userId
+            const { userId } = result
+            const userEmail = await getEmailOf(userId)
+            return { userId, userEmail }
         }
     }
     return null
@@ -67,3 +72,5 @@ export function setJWTCookieInResponse(res: MyApiResponse, userId: number) {
         }),
     )
 }
+
+export type BasePageData = { userEmail: string | null }

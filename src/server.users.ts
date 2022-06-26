@@ -17,15 +17,16 @@ export async function signUp({
 }: {
     email: string
     password: string
-}): Promise<'ok' | 'email_taken'> {
+}): Promise<number | 'email_taken'> {
     const salt = generateSalt()
     const password_hash = hash({ salt, password })
     try {
-        await getDb()
+        const { id } = await getDb()
             .insertInto('users')
             .values({ email, password_hash, salt })
-            .execute()
-        return 'ok'
+            .returning('id')
+            .executeTakeFirstOrThrow()
+        return id
     } catch (err) {
         const errAny = err as any
         if (errAny.constraint && errAny.constraint === 'email_unique') {
@@ -41,7 +42,7 @@ export async function signIn({
 }: {
     email: string
     password: string
-}) {
+}): Promise<number | 'wrong_email_or_password'> {
     const res = await getDb()
         .selectFrom('users')
         .select(['id', 'password_hash', 'salt'])
@@ -54,4 +55,13 @@ export async function signIn({
         }
     }
     return 'wrong_email_or_password'
+}
+
+export async function getEmailOf(userId: number): Promise<string> {
+    const { email } = await getDb()
+        .selectFrom('users')
+        .select('email')
+        .where('id', '=', userId)
+        .executeTakeFirstOrThrow()
+    return email
 }

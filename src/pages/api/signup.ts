@@ -4,20 +4,25 @@ import {
     parseEmailPasswordBody,
     sendError,
     sendOk,
+    setJWTCookieInResponse,
 } from '../../server.httpUtils'
 import { signUp } from '../../server.users'
 
 export default async function handler(req: NextApiRequest, res: MyApiResponse) {
     if (req.method !== 'POST') {
-        return sendError(res, 404, 'not found')
+        sendError(res, 404, 'not found')
+        return
     }
     const bodyParsed = parseEmailPasswordBody(req.body)
     if (bodyParsed === 'invalid') {
-        return sendError(res, 400, 'invalid body')
+        sendError(res, 400, 'invalid body')
+        return
     }
     const result = await signUp(bodyParsed)
     if (result === 'email_taken') {
-        return sendError(res, 400, 'email_taken')
+        sendError(res, 400, 'email_taken')
+        return
     }
+    setJWTCookieInResponse(res, result)
     sendOk(res)
 }
