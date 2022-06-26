@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { loadData } from '../../../../server.core'
+import { loadData } from '../../../server.core'
 
 export default async function handler(
     req: NextApiRequest,

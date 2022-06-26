@@ -9,7 +9,7 @@ import { getDb } from '../server.db'
 import {
     BasePageData,
     readNumberFromRouteParams,
-    readUserFromRequest
+    readUserFromRequest,
 } from '../server.httpUtils'
 import { SeasonWithShow } from '../structs'
 
@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
         props: {
             seasons,
             year,
-            now: moment().toISOString(),¨
+            now: moment().toISOString(),
             userEmail: user && user.userEmail,
         },
     }

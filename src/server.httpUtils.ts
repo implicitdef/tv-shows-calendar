@@ -1,4 +1,4 @@
-import { NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import * as jwt from 'jsonwebtoken'
 import { JWT_SECRET } from './server.conf'
 import { IncomingMessage, ServerResponse } from 'http'
@@ -51,6 +51,19 @@ export function readNumberFromRouteParams(
     } catch {
         return null
     }
+}
+
+export function readNumberFromQueryString(
+    req: NextApiRequest,
+    name: string,
+): number | null {
+    try {
+        const value = req.query[name]
+        if (typeof value === 'string') {
+            return parseInt(value, 10)
+        }
+    } catch {}
+    return null
 }
 
 export function generateJWT(userId: number): string {
