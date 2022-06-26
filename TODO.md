@@ -1,13 +1,6 @@
--   annuler firebase et remplacer par de l'auth fait maison :
-
-    -   brancher les bonnes données si on est connecté
-    -   ajuster la regexp email côté back et front
-    -   voir comment détruire le cookie proprement depuis le backend pour le signout
-    -   step 7 : brancher tout et tester
-
--   brancher toute la search et l'ajout de show
--   Brancher le front en mode non-authenticated
--   Puis faire une passe sur les endpoints, il y en a qui seront devenus inutiles
--   Puis repasser sur les controller pour cleaner un peu, mutualiser des petits trucs
--   Revérifier les données : pourquoi ej n'ai pas "Rome" et "The terror" ?
 -   revoir le CSS de la search bar
+-   cleaner les reste de css de bootstrap (col-3 etc.)
+-   Revérifier les données : pourquoi ej n'ai pas "Rome" et "The terror" ?
+-   ptêt faire du xhr pour rafraichir les shows après avir ajouté/supprimé. Ca doit pas couter beaucoup de code
+-   bien comparer avec la prod, voir ce que j'y gagne/perds.
+-   MEP ? attention il faudra migrer la base

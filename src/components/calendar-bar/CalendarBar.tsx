@@ -11,9 +11,9 @@ export default function CalendarBar({
 }) {
     const searchBoxOrNot = showAddShowButton ? <SearchBox /> : null
     return (
-        <div className="calendar-bar row no-gutters">
-            <div className="col-md-3 col-sm-6">{searchBoxOrNot}</div>
-            <div className="calendar-bar__nav col-md-6 col-sm-6">
+        <div className="calendar-bar">
+            <div className="calendar-bar__searchbox">{searchBoxOrNot}</div>
+            <div className="calendar-bar__nav">
                 <Link href={`/${year - 1}`}>
                     <span className="calendar-bar__back">{'⬅️'}</span>
                 </Link>

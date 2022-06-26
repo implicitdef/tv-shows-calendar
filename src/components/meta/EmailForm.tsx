@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { EmailAndPassword } from '../../client.api'
+import { checkEmailAddress } from '../../sharedUtils'
 
 export const EmailForm = ({
     onSubmit,
@@ -21,8 +22,7 @@ export const EmailForm = ({
                 e.preventDefault()
                 setErrorMessage(null)
                 setDisplaySuccess(false)
-                // TODO ici mettre une vraie regexp d'email
-                if (!/.*@gmail.com*/.test(email)) {
+                if (!checkEmailAddress(email)) {
                     setErrorMessage('Please enter a valid email address')
                     return
                 }

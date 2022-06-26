@@ -25,7 +25,7 @@ const CalendarCore: React.FC<{
     }
     return (
         <div className="calendar-core">
-            <div className="col-12 calendar-core__inner">
+            <div className="calendar-core__inner">
                 {marker}
                 <MonthsBackground year={year} />
                 <MonthsNamesRow year={year} />

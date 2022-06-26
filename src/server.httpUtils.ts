@@ -5,6 +5,7 @@ import { IncomingMessage, ServerResponse } from 'http'
 import cookie from 'cookie'
 import { getEmailOf } from './server.users'
 import { ParsedUrlQuery } from 'querystring'
+import { checkEmailAddress } from './sharedUtils'
 
 export type MyApiResponse = NextApiResponse<{ message: string }>
 
@@ -28,8 +29,7 @@ export function parseEmailPasswordBody(
                 typeof email === 'string' &&
                 typeof password === 'string' &&
                 password.length &&
-                // TODO ici mettre une vraie regexp d'email
-                /.*@gmail.com/.test(email)
+                checkEmailAddress(email)
             ) {
                 return { email, password }
             }
@@ -111,11 +111,10 @@ export function setJWTCookieInResponse(res: ServerResponse, userId: number) {
 export function setDestructionOfJWTCookieInResponse(res: ServerResponse) {
     const _365DaysInSeconds = 365 * 24 * 60 * 60
     res.setHeader(
-        // TODO find correct way to destroy the cookie
         'Set-Cookie',
         cookie.serialize('jwt', '', {
             httpOnly: true,
-            maxAge: _365DaysInSeconds,
+            expires: new Date(0), // setting a date in the past deletes the cookie
             path: '/',
             secure: true,
             sameSite: 'strict',

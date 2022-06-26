@@ -9,7 +9,7 @@ export function Layout({
     userEmail: string | null
 }) {
     return (
-        <div className="page container-fluid">
+        <div className="page">
             <TopBar {...{ userEmail }} />
             {children}
         </div>

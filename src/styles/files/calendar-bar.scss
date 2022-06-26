@@ -1,8 +1,15 @@
 .calendar-bar {
     color: white;
     margin-bottom: 20px;
+    display: flex;ﬂ
+
+    .calendar-bar__searchbox {
+        width: 33%;
+    }
     .calendar-bar__nav {
+        width: 33%;
         display: flex;
+
         justify-content: center;
 
         .calendar-bar__year {
