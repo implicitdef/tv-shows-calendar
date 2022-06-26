@@ -32,7 +32,7 @@ export const EmailForm = ({
                 }
                 const res = await onSubmit({ email, password })
                 if (res === 'ok') {
-                    setDisplaySuccess(true)
+                    window.location.href = '/'
                 } else if (res === 'wrong_email_or_password') {
                     setErrorMessage('Wrong email or password')
                 } else {

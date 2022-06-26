@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next'
 import * as jwt from 'jsonwebtoken'
 import { JWT_SECRET } from './server.conf'
-import { IncomingMessage } from 'http'
+import { IncomingMessage, ServerResponse } from 'http'
 import cookie from 'cookie'
 import { getEmailOf } from './server.users'
 
@@ -65,11 +65,26 @@ export async function readUserFromRequest(
     return null
 }
 
-export function setJWTCookieInResponse(res: MyApiResponse, userId: number) {
+export function setJWTCookieInResponse(res: ServerResponse, userId: number) {
     const _365DaysInSeconds = 365 * 24 * 60 * 60
     res.setHeader(
         'Set-Cookie',
         cookie.serialize('jwt', generateJWT(userId), {
+            httpOnly: true,
+            maxAge: _365DaysInSeconds,
+            path: '/',
+            secure: true,
+            sameSite: 'strict',
+        }),
+    )
+}
+
+export function setDestructionOfJWTCookieInResponse(res: ServerResponse) {
+    const _365DaysInSeconds = 365 * 24 * 60 * 60
+    res.setHeader(
+        // TODO find correct way to destroy the cookie
+        'Set-Cookie',
+        cookie.serialize('jwt', '', {
             httpOnly: true,
             maxAge: _365DaysInSeconds,
             path: '/',

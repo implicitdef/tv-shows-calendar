@@ -1,9 +1,11 @@
 -   annuler firebase et remplacer par de l'auth fait maison :
-    -   step 8 : implementer le signout
-    -   step 10 : le form de signin/signup doit rediriger vers la home si successful
+
+    -   brancher les bonnes données si on est connecté
     -   ajuster la regexp email côté back et front
+    -   voir comment détruire le cookie proprement depuis le backend pour le signout
     -   step 7 : brancher tout et tester
+
+-   brancher toute la search et l'ajout de show
 -   Brancher le front en mode non-authenticated
--   Puis faire l'auth avec iron session (essayer)
 -   Puis faire une passe sur les endpoints, il y en a qui seront devenus inutiles
 -   Puis repasser sur les controller pour cleaner un peu, mutualiser des petits trucs

@@ -23,9 +23,11 @@ export function TopBar({ userEmail }: { userEmail: string | null }) {
             {userEmail && (
                 <>
                     <span>{userEmail}</span>
-                    <a className="auth-bar__button" onClick={() => {}}>
-                        sign out
-                    </a>
+                    <Link href="/signout">
+                        <a className="auth-bar__button" onClick={() => {}}>
+                            sign out
+                        </a>
+                    </Link>
                 </>
             )}
         </div>
