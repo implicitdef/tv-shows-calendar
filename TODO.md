@@ -1,8 +1,7 @@
 -   annuler firebase et remplacer par de l'auth fait maison :
     -   step 8 : implementer le signout
     -   step 10 : le form de signin/signup doit rediriger vers la home si successful
-    -   refuser empty password (ça fera un message d'erreur à gérer !)
-    -   refuser email invalid (ça fera un message d'erreur à gérer !)
+    -   ajuster la regexp email côté back et front
     -   step 7 : brancher tout et tester
 -   Brancher le front en mode non-authenticated
 -   Puis faire l'auth avec iron session (essayer)

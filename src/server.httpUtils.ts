@@ -23,7 +23,13 @@ export function parseEmailPasswordBody(
     if (typeof body === 'string') {
         try {
             const { email, password } = JSON.parse(body)
-            if (typeof email === 'string' && typeof password === 'string') {
+            if (
+                typeof email === 'string' &&
+                typeof password === 'string' &&
+                password.length &&
+                // TODO ici mettre une vraie regexp d'email
+                /.*@gmail.com/.test(email)
+            ) {
                 return { email, password }
             }
         } catch (err) {}

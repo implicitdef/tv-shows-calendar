@@ -21,6 +21,15 @@ export const EmailForm = ({
                 e.preventDefault()
                 setErrorMessage(null)
                 setDisplaySuccess(false)
+                // TODO ici mettre une vraie regexp d'email
+                if (!/.*@gmail.com*/.test(email)) {
+                    setErrorMessage('Please enter a valid email address')
+                    return
+                }
+                if (!password.length) {
+                    setErrorMessage('Please enter a password')
+                    return
+                }
                 const res = await onSubmit({ email, password })
                 if (res === 'ok') {
                     setDisplaySuccess(true)
