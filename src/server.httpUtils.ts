@@ -4,6 +4,7 @@ import { JWT_SECRET } from './server.conf'
 import { IncomingMessage, ServerResponse } from 'http'
 import cookie from 'cookie'
 import { getEmailOf } from './server.users'
+import { ParsedUrlQuery } from 'querystring'
 
 export type MyApiResponse = NextApiResponse<{ message: string }>
 
@@ -35,6 +36,21 @@ export function parseEmailPasswordBody(
         } catch (err) {}
     }
     return 'invalid'
+}
+
+export function readNumberFromRouteParams(
+    params: ParsedUrlQuery | undefined = {},
+    name: string,
+): number | null {
+    try {
+        const str = params[name]
+        if (typeof str !== 'string') {
+            return null
+        }
+        return parseInt(str, 10)
+    } catch {
+        return null
+    }
 }
 
 export function generateJWT(userId: number): string {
