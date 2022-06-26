@@ -65,11 +65,11 @@ export function Page({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <Layout {...{ userEmail }}>
-            <CalendarBar {...{ year }} showAddShowButton={false} />
+            <CalendarBar {...{ year }} showAddShowButton={!!userEmail} />
             <CalendarCore
                 {...{ year, seasons }}
                 now={moment(now)}
-                showRemoveButtons={false}
+                showRemoveButtons={!!userEmail}
             />
         </Layout>
     )

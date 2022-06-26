@@ -1,23 +1,46 @@
 import * as React from 'react'
+import { useState } from 'react'
 import { Show } from '../../structs'
 
 export default function SearchBox() {
     // TODO get these props from somewhere
-    const shows: Show[] = []
-    const input = ''
-    const open = false
-    const onInput = (input: string) => {}
-    const onSubmit = (show: Show) => {}
-    const onOpen = () => {}
-    // TODO make it interactive
+    const [shows, setShows] = useState<Show[]>([])
+    const [open, setIsOpen] = useState(false)
+    const [value, setValue] = useState('')
+    const onChange = async (input: string) => {
+        setValue(input)
+        if (!input.length) {
+            setShows([])
+            return
+        }
+        const response = await fetch(
+            `./api/shows?q=${encodeURIComponent(input)}`,
+        )
+        if (!response.ok) {
+            console.error('API error', response.status)
+            setShows([])
+            return
+        }
+        setShows((await response.json()) as Show[])
+    }
+    const onSubmit = async (show: Show) => {
+        const response = await fetch(`./api/shows/${show.id}/subscription`, {
+            method: 'post',
+        })
+        if (!response.ok) {
+            console.error('API error', response.status)
+            return
+        }
+        window.location.reload()
+    }
     return (
         <div className="search-box">
             <input
                 type="text"
                 className="search-box__input"
-                onChange={(e) => onInput(e.target.value)}
-                value={input}
-                onFocus={onOpen}
+                onChange={(e) => onChange(e.target.value)}
+                value={value}
+                onFocus={() => setIsOpen(true)}
                 placeholder="Add a TV show"
             />
             <div className="search-box__results">

@@ -9,3 +9,5 @@
 -   Brancher le front en mode non-authenticated
 -   Puis faire une passe sur les endpoints, il y en a qui seront devenus inutiles
 -   Puis repasser sur les controller pour cleaner un peu, mutualiser des petits trucs
+-   Revérifier les données : pourquoi ej n'ai pas "Rome" et "The terror" ?
+-   revoir le CSS de la search bar

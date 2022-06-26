@@ -1,11 +1,10 @@
-import moment, { Moment } from 'moment'
+import { Moment } from 'moment'
 import * as React from 'react'
+import { SeasonWithShow } from '../../structs'
 import Marker from './Marker'
 import MonthsBackground from './MonthsBackground'
 import MonthsNamesRow from './MonthsNamesRow'
 import SeasonRow from './SeasonRow'
-import { isTimeRangeInYear } from '../../dateUtils'
-import { SeasonWithShow } from '../../structs'
 
 const CalendarCore: React.FC<{
     year: number
@@ -14,30 +13,34 @@ const CalendarCore: React.FC<{
     showRemoveButtons: boolean
 }> = ({ year, seasons, now, showRemoveButtons }) => {
     const marker = now.year() === year ? <Marker now={now} /> : null
+    async function removeShow(showId: number) {
+        const response = await fetch(`./api/shows/${showId}/subscription`, {
+            method: 'delete',
+        })
+        if (!response.ok) {
+            console.error('API error', response.status)
+            return
+        }
+        window.location.reload()
+    }
     return (
         <div className="calendar-core">
             <div className="col-12 calendar-core__inner">
                 {marker}
                 <MonthsBackground year={year} />
                 <MonthsNamesRow year={year} />
-                {seasons
-                    // TODO est-ce que c'est là qu'on devrait filtrer ? c'est pas avant ?
-                    .filter((season) => {
-                        return isTimeRangeInYear(season.time, year)
-                    })
-                    .map((season, index) => {
-                        return (
-                            <SeasonRow
-                                key={`${season.show.id}S${season.number}`}
-                                index={index}
-                                season={season}
-                                year={year}
-                                /* TODO implement onClose */
-                                onClose={() => {}}
-                                showRemoveButtons={showRemoveButtons}
-                            />
-                        )
-                    })}
+                {seasons.map((season, index) => {
+                    return (
+                        <SeasonRow
+                            key={`${season.show.id}S${season.number}`}
+                            index={index}
+                            season={season}
+                            year={year}
+                            onClose={() => removeShow(season.show.id)}
+                            showRemoveButtons={showRemoveButtons}
+                        />
+                    )
+                })}
             </div>
         </div>
     )
