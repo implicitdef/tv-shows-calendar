@@ -6,6 +6,7 @@ import cookie from 'cookie'
 import { getEmailOf } from './server.users'
 import { ParsedUrlQuery } from 'querystring'
 import { checkEmailAddress } from './sharedUtils'
+import { SeasonWithShow } from './structs'
 
 export type MyApiResponse = NextApiResponse<{ message: string }>
 
@@ -38,8 +39,8 @@ export function parseEmailPasswordBody(
     return 'invalid'
 }
 
-export function readNumberFromRouteParams(
-    params: ParsedUrlQuery | undefined = {},
+export function readNumberFromRouteParamsOrQuery(
+    params: ParsedUrlQuery | NextApiRequest['query'] | undefined = {},
     name: string,
 ): number | null {
     try {

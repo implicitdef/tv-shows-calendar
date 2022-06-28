@@ -1,6 +1,5 @@
--   revoir le CSS de la search bar
--   cleaner les reste de css de bootstrap (col-3 etc.)
+-   repasser sur les TODOs ds le code
+-   Pourquoi les seasons sont pas updatées quand je navigue d'année en année ? pourquoi je garde mon state ?
 -   Revérifier les données : pourquoi ej n'ai pas "Rome" et "The terror" ?
--   ptêt faire du xhr pour rafraichir les shows après avir ajouté/supprimé. Ca doit pas couter beaucoup de code
 -   bien comparer avec la prod, voir ce que j'y gagne/perds.
 -   MEP ? attention il faudra migrer la base

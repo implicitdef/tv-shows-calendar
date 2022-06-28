@@ -5,11 +5,15 @@ import SearchBox from './SearchBox'
 export default function CalendarBar({
     year,
     showAddShowButton,
+    refreshSeasons,
 }: {
     year: number
     showAddShowButton: boolean
+    refreshSeasons: () => Promise<void>
 }) {
-    const searchBoxOrNot = showAddShowButton ? <SearchBox /> : null
+    const searchBoxOrNot = showAddShowButton ? (
+        <SearchBox {...{ refreshSeasons }} />
+    ) : null
     return (
         <div className="calendar-bar">
             <div className="calendar-bar__searchbox">{searchBoxOrNot}</div>

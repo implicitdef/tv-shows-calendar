@@ -1,5 +1,6 @@
+import { isTimeRangeInYear } from './dateUtils'
 import { getDb } from './server.db'
-import { DataFromDb } from './structs'
+import { DataFromDb, SeasonWithShow } from './structs'
 
 export async function loadData(): Promise<DataFromDb> {
     const db = getDb()
@@ -48,3 +49,31 @@ export const DEFAULT_SHOWS_IDS = [
     93405, // Squid game
     82596, // Emily in Paris
 ]
+
+export async function loadSeasonsWithShow(
+    year: number,
+    userId: number | null,
+): Promise<SeasonWithShow[]> {
+    const fullData = await loadData()
+    const showsIds =
+        userId !== null
+            ? (
+                  await getDb()
+                      .selectFrom('users_series')
+                      .select('serie_id')
+                      .where('user_id', '=', userId)
+                      .orderBy('serie_id', 'asc')
+                      .execute()
+              ).map((_) => _.serie_id)
+            : DEFAULT_SHOWS_IDS
+
+    const showsWithSeasons = fullData.filter((_) =>
+        showsIds.includes(_.serie.id),
+    )
+    const seasons: SeasonWithShow[] = showsWithSeasons
+        .flatMap(({ serie, seasons }) =>
+            seasons.map((season) => ({ show: serie, ...season })),
+        )
+        .filter((_) => isTimeRangeInYear(_.time, year))
+    return seasons
+}

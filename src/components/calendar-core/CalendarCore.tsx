@@ -1,5 +1,6 @@
 import { Moment } from 'moment'
 import * as React from 'react'
+import { useState } from 'react'
 import { SeasonWithShow } from '../../structs'
 import Marker from './Marker'
 import MonthsBackground from './MonthsBackground'
@@ -11,8 +12,10 @@ const CalendarCore: React.FC<{
     now: Moment
     seasons: SeasonWithShow[]
     showRemoveButtons: boolean
-}> = ({ year, seasons, now, showRemoveButtons }) => {
+    refreshSeasons: () => Promise<void>
+}> = ({ year, seasons, now, showRemoveButtons, refreshSeasons }) => {
     const marker = now.year() === year ? <Marker now={now} /> : null
+
     async function removeShow(showId: number) {
         const response = await fetch(`./api/shows/${showId}/subscription`, {
             method: 'delete',
@@ -21,8 +24,9 @@ const CalendarCore: React.FC<{
             console.error('API error', response.status)
             return
         }
-        window.location.reload()
+        await refreshSeasons()
     }
+
     return (
         <div className="calendar-core">
             <div className="calendar-core__inner">

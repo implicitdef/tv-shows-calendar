@@ -2,7 +2,11 @@ import * as React from 'react'
 import { useState } from 'react'
 import { Show } from '../../structs'
 
-export default function SearchBox() {
+export default function SearchBox({
+    refreshSeasons,
+}: {
+    refreshSeasons: () => Promise<void>
+}) {
     // TODO get these props from somewhere
     const [shows, setShows] = useState<Show[]>([])
     const [open, setIsOpen] = useState(false)
@@ -31,7 +35,9 @@ export default function SearchBox() {
             console.error('API error', response.status)
             return
         }
-        window.location.reload()
+        setIsOpen(false)
+        setValue('')
+        await refreshSeasons()
     }
     return (
         <div className="search-box">

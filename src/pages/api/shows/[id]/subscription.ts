@@ -9,12 +9,9 @@ import {
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<
-        | {
-              message: string
-          }
-        | { error: string }
-    >,
+    res: NextApiResponse<{
+        message: string
+    }>,
 ) {
     const user = await readUserFromRequest(req)
     if (!user) {
