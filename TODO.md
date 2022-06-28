@@ -1,5 +1,5 @@
--   repasser sur les TODOs ds le code
--   Pourquoi les seasons sont pas updatées quand je navigue d'année en année ? pourquoi je garde mon state ?
 -   Revérifier les données : pourquoi ej n'ai pas "Rome" et "The terror" ?
 -   bien comparer avec la prod, voir ce que j'y gagne/perds.
+-   setup conf pour la prod (db)
 -   MEP ? attention il faudra migrer la base
+-   essayer d'augmenter le nb de default show ids : est-ce que c'est suffisamment performant en prod ? si oui je peux en mettre un paquet, des anciennes et des récentes

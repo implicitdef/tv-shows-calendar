@@ -7,7 +7,6 @@ export default function SearchBox({
 }: {
     refreshSeasons: () => Promise<void>
 }) {
-    // TODO get these props from somewhere
     const [shows, setShows] = useState<Show[]>([])
     const [open, setIsOpen] = useState(false)
     const [value, setValue] = useState('')

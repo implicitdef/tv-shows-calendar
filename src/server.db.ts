@@ -28,7 +28,6 @@ export function getDb(): Kysely<Database> {
         db = new Kysely<Database>({
             dialect: new PostgresDialect({
                 pool: new Pool({
-                    // TODO change that
                     host: '127.0.0.1',
                     user: 'eletallieur',
                     password: '',
