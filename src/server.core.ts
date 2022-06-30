@@ -55,6 +55,7 @@ export async function loadSeasonsWithShow(
     userId: number | null,
 ): Promise<SeasonWithShow[]> {
     const fullData = await loadData()
+    console.log('fullData', JSON.stringify(fullData).substring(0, 40))
     const showsIds =
         userId !== null
             ? (

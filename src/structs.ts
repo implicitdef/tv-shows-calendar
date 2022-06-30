@@ -27,3 +27,17 @@ export type TimeRange = {
 }
 
 export type DataFromDb = ShowAndSeasons[]
+
+type ExpectedDataFormat = {
+    serie: {
+        id: number
+        name: string
+    }
+    seasons: {
+        number: number
+        time: {
+            start: string
+            end: string
+        }
+    }[]
+}[]

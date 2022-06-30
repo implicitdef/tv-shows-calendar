@@ -1,6 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PUSH_DATA_API_KEY } from '../../server.conf'
 import { getDb } from '../../server.db'
+import { sendError } from '../../server.httpUtils'
+
+type ExpectedDataFormat = {
+    serie: {
+        id: number
+        name: string
+    }
+    seasons: {
+        number: number
+        time: {
+            start: string
+            end: string
+        }
+    }[]
+}[]
 
 // Overrides the underlying data (shows, seasons, etc.) in one big HTTP POST
 // Actually will just inserts a new line in the DB, for safety
@@ -19,19 +34,18 @@ export default async function handler(
     if (req.method === 'POST') {
         const { key } = req.query
         if (!key || typeof key !== 'string' || key !== PUSH_DATA_API_KEY) {
-            res.status(401).send({ error: 'invalid key' })
+            sendError(res, 401, 'invalid key')
+            return
         }
-        if (typeof req.body !== 'string') {
-            res.status(401).send({
-                error: 'invalid request body, should be a string',
-            })
-        }
-        await getDb()
-            .insertInto('raw_json_data')
-            .values({ content: req.body })
-            .execute()
+        const content = JSON.stringify(req.body as ExpectedDataFormat)
+        console.log(
+            `Inserting new data into the DB (length: ${
+                content.length
+            }) : ${content.substring(0, 30)}...`,
+        )
+        await getDb().insertInto('raw_json_data').values({ content }).execute()
         res.json({ message: 'Done' })
     } else {
-        res.status(404).send({ error: 'not found' })
+        res.status(400).send({ error: 'wrong method' })
     }
 }

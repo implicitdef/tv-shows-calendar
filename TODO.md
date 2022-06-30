@@ -1,4 +1,3 @@
--   Revérifier les données : pourquoi ej n'ai pas "Rome" et "The terror" ?
 -   bien comparer avec la prod, voir ce que j'y gagne/perds.
 -   setup conf pour la prod (db)
 -   MEP ? attention il faudra migrer la base
