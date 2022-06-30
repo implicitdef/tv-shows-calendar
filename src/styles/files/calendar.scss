@@ -56,9 +56,13 @@
         .calendar-core__month-name {
             @extend .absolute-box;
             @extend .centering;
-            color: white;
             z-index: 70;
             color: #909090;
+            font-family: 'Boogaloo';
+            font-size: 1.3em;
+            // font-weight: normal;
+            font-style: italic;
+            // text-transform: capitalize;
         }
     }
 
@@ -77,7 +81,7 @@
             text-align: center;
             background: darkcyan;
             color: white;
-            font-size: 1em;
+            font-size: 1.2em;
             padding: 10px 32px 10px 10px;
             border: 1px solid #ffffff;
             border-radius: 5px;
