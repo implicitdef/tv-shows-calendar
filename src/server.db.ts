@@ -1,5 +1,6 @@
 import { ColumnType, Generated, Kysely, PostgresDialect } from 'kysely'
 import { Pool } from 'pg'
+import { DB_POOL_CONFIG } from './server.conf'
 
 type Database = {
     raw_json_data: {
@@ -27,12 +28,7 @@ export function getDb(): Kysely<Database> {
         console.log('~~~ Connecting to the db')
         db = new Kysely<Database>({
             dialect: new PostgresDialect({
-                pool: new Pool({
-                    host: '127.0.0.1',
-                    user: 'eletallieur',
-                    password: '',
-                    database: 'tv_shows_calendar',
-                }),
+                pool: new Pool(DB_POOL_CONFIG),
             }),
         })
     }
