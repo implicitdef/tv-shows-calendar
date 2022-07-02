@@ -17,5 +17,3 @@ export const DB_POOL_CONFIG: PoolConfig = process.env.DATABASE_URL
           password: '',
           database: 'tv_shows_calendar',
       }
-
-export const PORT = process.env.PORT || 3333
