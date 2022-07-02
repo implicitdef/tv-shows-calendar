@@ -1,3 +1,1 @@
--   setup conf pour la prod (db)
--   MEP ? attention il faudra migrer la base
 -   essayer d'augmenter le nb de default show ids : est-ce que c'est suffisamment performant en prod ? si oui je peux en mettre un paquet, des anciennes et des récentes
