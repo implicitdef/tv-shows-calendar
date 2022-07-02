@@ -82,9 +82,11 @@
             background: darkcyan;
             color: white;
             font-size: 1.2em;
+            font-weight: bold;
             padding: 10px 32px 10px 10px;
             border: 1px solid #ffffff;
             border-radius: 5px;
+            text-shadow: rgba(0, 0, 0) 0px 0px 2px;
             box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px,
                 rgba(0, 0, 0, 0.227451) 0px 3px 10px;
             &:hover {
