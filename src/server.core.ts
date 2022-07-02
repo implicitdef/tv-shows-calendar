@@ -16,8 +16,6 @@ export async function loadData(): Promise<DataFromDb> {
 }
 
 export const DEFAULT_SHOWS_IDS = [
-    // If you put too much of those, the first request starts to be a bit too long
-
     // To find ids of shows, look them up on the search field in the app
     // add them, and look in the network tab at the POST request
 
