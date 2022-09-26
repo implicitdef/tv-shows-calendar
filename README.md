@@ -1,4 +1,4 @@
-# A calendar to visualize when the next seasons of your favorite tvshows are going to be aired
+# A visual calendar for your TV shows
 
 
 Hosted at https://www.implicitdef.com/tv-shows-calendar
