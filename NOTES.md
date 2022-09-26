@@ -1,6 +1,5 @@
 # How it works
 
-
 This repo is the front end (Next.js), backed by SQL database storing the data/
 
 I don't remember how much of it is rendered server side or client side, I hesitated between several versions.
@@ -20,7 +19,9 @@ The data, when received, is stored as a new line in a table. Old data is kept ju
 # Deployment
 
 It's on heroku.
-Not sure if you have to just push to master, or if you have to use heroku CLI to push manually to heroku.
+It seems you just have to push to master, Heroku should listen to it.
+
+You can also use the Heroku CLI to manually push, see logs, etc.
 
 # Usage
 
