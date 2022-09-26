@@ -46,6 +46,8 @@ export const DEFAULT_SHOWS_IDS = [
     60574, // Peaky blinders
     93405, // Squid game
     82596, // Emily in Paris
+    94997, // House of the Dragon
+    84773, // Rings of power
 ]
 
 export async function loadSeasonsWithShow(
