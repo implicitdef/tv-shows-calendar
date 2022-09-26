@@ -1,3 +1,27 @@
+# How it works
+
+
+This repo is the front end (Next.js), backed by SQL database storing the data/
+
+I don't remember how much of it is rendered server side or client side, I hesitated between several versions.
+
+It seems most of it is rendered server side (we receive the HTML with the series and everything from the server)
+But if you add a tv show, we fetch in XHR the series, and the DOM seems updated client side.
+So it's kind of a mix.
+
+# Feeding the data
+
+The data is fetched and pushed by the "feed" https://github.com/implicitdef/tv-shows-calendar-feed. The feed has to be launched locally, manually, from time to time, when the data gets too stale.
+
+This server exposes an endpoint to POST the latest data (full JSON dump of the latest data). The feed POSTs to this endpoint.
+
+The data, when received, is stored as a new line in a table. Old data is kept just in case.
+
+# Deployment
+
+It's on heroku.
+Not sure if you have to just push to master, or if you have to use heroku CLI to push manually to heroku.
+
 # Usage
 
     # en local
