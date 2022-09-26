@@ -23,6 +23,10 @@ It seems you just have to push to master, Heroku should listen to it.
 
 You can also use the Heroku CLI to manually push, see logs, etc.
 
+# TODOs / bugs
+
+I've seen a weird bug with the search, I was typing and the results kept popping and changing unexpectedly. Like I was querying on each letter and the results were coming in random order.
+
 # Usage
 
     # en local
