@@ -1,6 +1,5 @@
 # A visual calendar for your TV shows
 
-
 Hosted at https://www.implicitdef.com/tv-shows-calendar
 
 This calendar helps you keep track of when your favorites TV shows are aired, season by season.
