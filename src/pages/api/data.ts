@@ -49,3 +49,13 @@ export default async function handler(
         res.status(400).send({ error: 'wrong method' })
     }
 }
+
+// https://stackoverflow.com/questions/68574254/body-exceeded-1mb-limit-error-in-next-js-api-route
+// Si cette erreur pose quand même problème, on pourra envisager de compresser le body
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '4mb',
+        },
+    },
+}
