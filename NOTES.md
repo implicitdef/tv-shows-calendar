@@ -1,3 +1,18 @@
+# 2026-04 notes after deletion from Heroku
+
+I was stilled billed 7$ a month for this app on Heroku, so I deleted it completely from Heroku. I've also removed my credit card from Heroku so they can't bill me anything.
+It was a basic web dyno and no add-ons, so I don't know how it worked without the database. Maybe I was using the postgresql on digital ocean.
+
+# 2025-12 THIS PROJECT NEEDS A NEXT.JS UPDATE (SECURITY REASONS)
+
+Around that time there was a big next.js vulnerability found, here's some text about it :
+
+```
+ If you are using Next.js, every version between Next.js 15 and 16 is affected, and we recommend immediately updating to the latest Next.js versions containing the appropriate fixes (15.0.5, 15.1.9, 15.2.6, 15.3.6, 15.4.8, 15.5.7, 16.0.7).
+```
+
+DO NOT REDEPLOY THIS PROJECT WITHOUT UPGRADING (which might be a lot of work)
+
 # How it works
 
 This repo is the front end (Next.js), backed by SQL database storing the data/
